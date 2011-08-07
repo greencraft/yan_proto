@@ -5070,7 +5070,7 @@
 		<string>PrimaryDocumentVisibleCharacterRange</string>
 		<string>HideAllIssues</string>
 		<string>PrimaryDocumentSelectedCharacterRange</string>
-		<real>334384815.35112798</real>
+		<real>334384979.403207</real>
 		<string>{8854, 876}</string>
 		<string>{9193, 181}</string>
 		<string>-getChildByTag:</string>
@@ -6396,7 +6396,7 @@
 				</dict>
 			</array>
 		</dict>
-		<real>334384815.35166502</real>
+		<real>334384979.40363503</real>
 		<string>{8854, 876}</string>
 		<string>{9193, 181}</string>
 		<dict>
@@ -8641,7 +8641,7 @@
 				</dict>
 			</array>
 		</dict>
-		<real>334384815.35001802</real>
+		<real>334384979.400132</real>
 		<string>{8854, 876}</string>
 		<string>{9193, 181}</string>
 		<dict>
@@ -9208,8 +9208,8 @@
 				</dict>
 			</array>
 		</dict>
-		<real>334384815.350124</real>
-		<string>{474, 755}</string>
+		<real>334384979.40023702</real>
+		<string>{92933, 949}</string>
 		<dict>
 			<key>$class</key>
 			<dict>
