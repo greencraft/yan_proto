@@ -13,7 +13,9 @@
 @implementation MainLayer
 
 @synthesize player = _player;
-@synthesize location = _location;
+@synthesize spawnPoint = _spawnPoint;
+@synthesize touchLoc = _touchLoc;
+
 
 - (id) init
 {
@@ -24,9 +26,8 @@
         
         
         //Add player sprite
-        CGSize winSize = [[CCDirector sharedDirector] winSize];
         self.player = [CCSprite spriteWithFile:@"LinkRunShieldD1.png"];
-        self.player.position = ccp(winSize.width/2, winSize.height/2);
+        self.player.position = self.spawnPoint;
         [self addChild:self.player z:100 tag:1];
         
     }
@@ -36,7 +37,7 @@
 
 - (void)pMove:(ccTime)dt
 {
-    CCAction *act1 = [CCMoveTo actionWithDuration:1 position:self.location];
+    CCAction *act1 = [CCMoveTo actionWithDuration:1 position:self.touchLoc];
     act1.tag = 1;
     [self.player runAction: act1]; 
 }
@@ -45,8 +46,8 @@
 {
     //get the touch location
     UITouch *touch = [touches anyObject];
-	self.location = [touch locationInView:[touch view]];
-	self.location = [[CCDirector sharedDirector] convertToGL:self.location];
+	self.touchLoc = [touch locationInView:[touch view]];
+	self.touchLoc = [[CCDirector sharedDirector] convertToGL:self.touchLoc];
     
     //schedule to move to the location, every .1
     [self schedule:@selector(pMove:) interval:.1];

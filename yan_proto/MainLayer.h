@@ -15,11 +15,14 @@
 
 @interface MainLayer : CCLayer {
     CCSprite *_player;
-    CGPoint _location;
+    CGPoint _spawnPoint;
+    CGPoint _touchLoc;
 }
 
 @property (nonatomic, retain) CCSprite *player;
-@property (nonatomic) CGPoint location;
+@property (nonatomic) CGPoint spawnPoint;
+@property (nonatomic) CGPoint touchLoc;
+
 
 
 

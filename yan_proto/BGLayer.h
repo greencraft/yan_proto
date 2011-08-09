@@ -13,11 +13,12 @@
 @interface BGLayer : CCLayer {
     CCTMXTiledMap *_tileMap;
     CCTMXLayer *_background;
-    
+    CGPoint _spawnPoint;
     
 }
 
 @property (nonatomic, retain) CCTMXTiledMap *tileMap;
 @property (nonatomic, retain) CCTMXLayer *background;
+@property (nonatomic) CGPoint spawnPoint;
 
 @end

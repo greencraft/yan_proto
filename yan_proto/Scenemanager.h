@@ -13,6 +13,9 @@
 
 @interface Scenemanager : CCScene {
     
+        CGPoint _location;
 }
+
+@property (nonatomic) CGPoint location;
 
 @end

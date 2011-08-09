@@ -11,6 +11,8 @@
 
 @implementation Scenemanager
 
+@synthesize location = _location;
+
 - (id) init
 {
     if ((self = [super init]))
@@ -19,6 +21,7 @@
         [self addChild:bgLayer z:0];
         
         MainLayer *mainLayer = [MainLayer node];
+        mainLayer.spawnPoint = bgLayer.spawnPoint;
         [self addChild:mainLayer z:1];
     }
     return self;

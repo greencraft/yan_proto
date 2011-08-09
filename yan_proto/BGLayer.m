@@ -13,6 +13,7 @@
 
 @synthesize tileMap = _tileMap;
 @synthesize background = _background;
+@synthesize spawnPoint = _spawnPoint;
 
 - (id) init
 {
@@ -45,6 +46,8 @@
         //set the variables for the spawnpoint location
         int x = [[spawnPoint valueForKey:@"x"] intValue];
         int y = [[spawnPoint valueForKey:@"y"] intValue];
+        
+        self.spawnPoint = ccp(x, y);
     }
     return self;
         
