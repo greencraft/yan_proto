@@ -8,15 +8,19 @@
 
 #import <Foundation/Foundation.h>
 #import "cocos2d.h"
-
+#import "Scenemanager.h"
 
 //#define LOGTHIS {};
 #define LOGTHIS {(CCLOG(@"\t\t[%@ - %@]", self, NSStringFromSelector(_cmd)));}
 
 @interface MainLayer : CCLayer {
-    CCSprite *player;
-    CGPoint location;
-    
+    CCSprite *_player;
+    CGPoint _location;
 }
+
+@property (nonatomic, retain) CCSprite *player;
+@property (nonatomic) CGPoint location;
+
+
 
 @end

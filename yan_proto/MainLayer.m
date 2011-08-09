@@ -12,6 +12,9 @@
 
 @implementation MainLayer
 
+@synthesize player = _player;
+@synthesize location = _location;
+
 - (id) init
 {
     if ((self = [super init]))
@@ -22,9 +25,9 @@
         
         //Add player sprite
         CGSize winSize = [[CCDirector sharedDirector] winSize];
-        player = [CCSprite spriteWithFile:@"LinkRunShieldD1.png"];
-        player.position = ccp(winSize.width/2, winSize.height/2);
-        [self addChild:player z:100 tag:1];
+        self.player = [CCSprite spriteWithFile:@"LinkRunShieldD1.png"];
+        self.player.position = ccp(winSize.width/2, winSize.height/2);
+        [self addChild:self.player z:100 tag:1];
         
     }
     return self;
@@ -33,17 +36,17 @@
 
 - (void)pMove:(ccTime)dt
 {
-    CCAction *act1 = [CCMoveTo actionWithDuration:1 position:location];
+    CCAction *act1 = [CCMoveTo actionWithDuration:1 position:self.location];
     act1.tag = 1;
-    [player runAction: act1]; 
+    [self.player runAction: act1]; 
 }
 
 - (void)ccTouchesMoved:(NSSet *)touches withEvent:(UIEvent *)event 
 {
     //get the touch location
     UITouch *touch = [touches anyObject];
-	location = [touch locationInView:[touch view]];
-	location = [[CCDirector sharedDirector] convertToGL:location];
+	self.location = [touch locationInView:[touch view]];
+	self.location = [[CCDirector sharedDirector] convertToGL:self.location];
     
     //schedule to move to the location, every .1
     [self schedule:@selector(pMove:) interval:.1];
@@ -52,7 +55,7 @@
 - (void)ccTouchesEnded:(NSSet *)touches withEvent:(UIEvent *)event 
 {
     //stop action, change this to a specific action instead of all actions
-    [player stopAllActions];
+    [self.player stopAllActions];
     
     //remove 'move' from the schedule stack to completley stop player
     [self unschedule:@selector(pMove:)];
@@ -60,6 +63,7 @@
 
 - (void) dealloc
 {
+    self.player = nil;
     [super dealloc];
 }
 @end

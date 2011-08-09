@@ -8,6 +8,7 @@
 
 #import <Foundation/Foundation.h>
 #import "cocos2d.h"
+#import "Scenemanager.h"
 
 @interface BGLayer : CCLayer {
     CCTMXTiledMap *_tileMap;
