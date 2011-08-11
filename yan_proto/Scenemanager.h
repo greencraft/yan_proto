@@ -8,14 +8,29 @@
 
 #import <Foundation/Foundation.h>
 #import "cocos2d.h"
-#import "MainLayer.h"
-#import "BGLayer.h"
 
-@interface Scenemanager : CCScene {
-    
-        CGPoint _location;
+@class MainLayer;
+@class BGLayer;
+#import "BGLayer.h"
+#import "MainLayer.h"
+
+
+
+@interface Scenemanager : CCScene 
+{
+    CGPoint _spawnPoint;
+    MainLayer *_mainLayer;
+    BGLayer *_bgLayer;
+    NSString *_myString;
+
 }
 
-@property (nonatomic) CGPoint location;
+//@property (nonatomic) CGPoint spawnPoint;
+//@property (nonatomic, retain) MainLayer *mainLayer;
+//@property (nonatomic, retain) BGLayer *bgLayer;
+//@property (nonatomic, retain) NSString *myString;
+
++ (Scenemanager*) sharedSceneManager;
+- (NSString *) getString;
 
 @end

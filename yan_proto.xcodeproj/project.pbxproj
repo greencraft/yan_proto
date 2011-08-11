@@ -131,6 +131,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		CC1AEB3613F345C70081527E /* SynthesizeSingleton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SynthesizeSingleton.h; sourceTree = "<group>"; };
 		CCAC13AC13EE3FD900751FC4 /* yan_proto.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = yan_proto.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		CCAC13B013EE3FD900751FC4 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		CCAC13B213EE3FD900751FC4 /* OpenGLES.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGLES.framework; path = System/Library/Frameworks/OpenGLES.framework; sourceTree = SDKROOT; };
@@ -430,6 +431,7 @@
 		CCAC13C013EE3FD900751FC4 /* yan_proto */ = {
 			isa = PBXGroup;
 			children = (
+				CC1AEB3613F345C70081527E /* SynthesizeSingleton.h */,
 				CCAC152113EE400100751FC4 /* MainLayer.h */,
 				CCAC152213EE400100751FC4 /* MainLayer.m */,
 				CCAC152313EE400100751FC4 /* Scenemanager.h */,
@@ -1048,6 +1050,7 @@
 				CCAC152013EE3FDC00751FC4 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

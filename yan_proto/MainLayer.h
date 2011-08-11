@@ -8,7 +8,9 @@
 
 #import <Foundation/Foundation.h>
 #import "cocos2d.h"
+//@class Scenemanager;
 #import "Scenemanager.h"
+
 
 //#define LOGTHIS {};
 #define LOGTHIS {(CCLOG(@"\t\t[%@ - %@]", self, NSStringFromSelector(_cmd)));}

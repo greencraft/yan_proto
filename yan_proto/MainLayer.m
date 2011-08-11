@@ -7,14 +7,14 @@
 //
 
 #import "MainLayer.h"
-#import "BGLayer.h"
-
+//#import "Scenemanager.h"
 
 @implementation MainLayer
 
 @synthesize player = _player;
 @synthesize spawnPoint = _spawnPoint;
 @synthesize touchLoc = _touchLoc;
+
 
 
 - (id) init
@@ -24,10 +24,11 @@
         //Enable touch events
         self.isTouchEnabled = YES;
         
-        
+        NSString *test = [[Scenemanager sharedSceneManager] getString];
+        CCLOG(@"%@", test);
         //Add player sprite
         self.player = [CCSprite spriteWithFile:@"LinkRunShieldD1.png"];
-        self.player.position = self.spawnPoint;
+        //self.player.position = [[Scenemanager sharedSceneManager].bgLayer.spawnPoint];
         [self addChild:self.player z:100 tag:1];
         
     }
@@ -61,6 +62,24 @@
     //remove 'move' from the schedule stack to completley stop player
     [self unschedule:@selector(pMove:)];
 }
+
+/*-(void)setViewpointCenter:(CGPoint) position {
+    
+    CGSize winSize = [[CCDirector sharedDirector] winSize];
+    
+    int x = MAX(position.x, winSize.width / 2);
+    int y = MAX(position.y, winSize.height / 2);
+    x = MIN(x, (_tileMap.mapSize.width * _tileMap.tileSize.width) 
+            - winSize.width / 2);
+    y = MIN(y, (_tileMap.mapSize.height * _tileMap.tileSize.height) 
+            - winSize.height/2);
+    CGPoint actualPosition = ccp(x, y);
+    
+    CGPoint centerOfView = ccp(winSize.width/2, winSize.height/2);
+    CGPoint viewPoint = ccpSub(centerOfView, actualPosition);
+    self.position = viewPoint;
+    
+}*/
 
 - (void) dealloc
 {

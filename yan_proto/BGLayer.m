@@ -9,11 +9,13 @@
 #import "BGLayer.h"
 
 
+
 @implementation BGLayer
 
 @synthesize tileMap = _tileMap;
 @synthesize background = _background;
 @synthesize spawnPoint = _spawnPoint;
+@synthesize myString = _myString;
 
 - (id) init
 {
@@ -46,8 +48,9 @@
         //set the variables for the spawnpoint location
         int x = [[spawnPoint valueForKey:@"x"] intValue];
         int y = [[spawnPoint valueForKey:@"y"] intValue];
-        
+        //set spawnpoint loc, this is passed to scenemanager where mainlayer takes it
         self.spawnPoint = ccp(x, y);
+
     }
     return self;
         
