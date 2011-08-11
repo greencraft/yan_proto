@@ -122,12 +122,12 @@
 		CCAC151413EE3FDB00751FC4 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = CCAC151313EE3FDB00751FC4 /* AppDelegate.m */; };
 		CCAC151713EE3FDB00751FC4 /* RootViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CCAC151613EE3FDB00751FC4 /* RootViewController.m */; };
 		CCAC152713EE400100751FC4 /* MainLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = CCAC152213EE400100751FC4 /* MainLayer.m */; };
-		CCAC152813EE400100751FC4 /* Scenemanager.m in Sources */ = {isa = PBXBuildFile; fileRef = CCAC152413EE400100751FC4 /* Scenemanager.m */; };
 		CCAC152913EE400100751FC4 /* BGLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = CCAC152613EE400100751FC4 /* BGLayer.m */; };
 		CCAC153013EE415600751FC4 /* meta_tiles.png in Resources */ = {isa = PBXBuildFile; fileRef = CCAC152E13EE415600751FC4 /* meta_tiles.png */; };
 		CCAC153113EE415600751FC4 /* tmw_desert_spacing.png in Resources */ = {isa = PBXBuildFile; fileRef = CCAC152F13EE415600751FC4 /* tmw_desert_spacing.png */; };
 		CCAC153313EE47CF00751FC4 /* Background.tmx in Resources */ = {isa = PBXBuildFile; fileRef = CCAC153213EE47CF00751FC4 /* Background.tmx */; };
 		CCAC153513EE48EA00751FC4 /* LinkRunShieldD1.png in Resources */ = {isa = PBXBuildFile; fileRef = CCAC153413EE48EA00751FC4 /* LinkRunShieldD1.png */; };
+		CCAC809A13F4737B00930A97 /* Scenemanager.m in Sources */ = {isa = PBXBuildFile; fileRef = CCAC809913F4737B00930A97 /* Scenemanager.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -367,14 +367,14 @@
 		CCAC151B13EE3FDC00751FC4 /* GameConfig.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GameConfig.h; sourceTree = "<group>"; };
 		CCAC152113EE400100751FC4 /* MainLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MainLayer.h; sourceTree = "<group>"; };
 		CCAC152213EE400100751FC4 /* MainLayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MainLayer.m; sourceTree = "<group>"; };
-		CCAC152313EE400100751FC4 /* Scenemanager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Scenemanager.h; sourceTree = "<group>"; };
-		CCAC152413EE400100751FC4 /* Scenemanager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Scenemanager.m; sourceTree = "<group>"; };
 		CCAC152513EE400100751FC4 /* BGLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BGLayer.h; sourceTree = "<group>"; };
 		CCAC152613EE400100751FC4 /* BGLayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BGLayer.m; sourceTree = "<group>"; };
 		CCAC152E13EE415600751FC4 /* meta_tiles.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = meta_tiles.png; path = Resources/meta_tiles.png; sourceTree = "<group>"; };
 		CCAC152F13EE415600751FC4 /* tmw_desert_spacing.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = tmw_desert_spacing.png; path = Resources/tmw_desert_spacing.png; sourceTree = "<group>"; };
 		CCAC153213EE47CF00751FC4 /* Background.tmx */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; name = Background.tmx; path = Resources/Background.tmx; sourceTree = "<group>"; };
 		CCAC153413EE48EA00751FC4 /* LinkRunShieldD1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = LinkRunShieldD1.png; path = Resources/LinkRunShieldD1.png; sourceTree = "<group>"; };
+		CCAC809813F4737B00930A97 /* Scenemanager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Scenemanager.h; sourceTree = "<group>"; };
+		CCAC809913F4737B00930A97 /* Scenemanager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Scenemanager.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -434,8 +434,8 @@
 				CC1AEB3613F345C70081527E /* SynthesizeSingleton.h */,
 				CCAC152113EE400100751FC4 /* MainLayer.h */,
 				CCAC152213EE400100751FC4 /* MainLayer.m */,
-				CCAC152313EE400100751FC4 /* Scenemanager.h */,
-				CCAC152413EE400100751FC4 /* Scenemanager.m */,
+				CCAC809813F4737B00930A97 /* Scenemanager.h */,
+				CCAC809913F4737B00930A97 /* Scenemanager.m */,
 				CCAC152513EE400100751FC4 /* BGLayer.h */,
 				CCAC152613EE400100751FC4 /* BGLayer.m */,
 				CCAC151213EE3FDB00751FC4 /* AppDelegate.h */,
@@ -953,8 +953,8 @@
 				CCAC151413EE3FDB00751FC4 /* AppDelegate.m in Sources */,
 				CCAC151713EE3FDB00751FC4 /* RootViewController.m in Sources */,
 				CCAC152713EE400100751FC4 /* MainLayer.m in Sources */,
-				CCAC152813EE400100751FC4 /* Scenemanager.m in Sources */,
 				CCAC152913EE400100751FC4 /* BGLayer.m in Sources */,
+				CCAC809A13F4737B00930A97 /* Scenemanager.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

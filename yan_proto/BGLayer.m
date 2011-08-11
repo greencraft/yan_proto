@@ -15,7 +15,6 @@
 @synthesize tileMap = _tileMap;
 @synthesize background = _background;
 @synthesize spawnPoint = _spawnPoint;
-@synthesize myString = _myString;
 
 - (id) init
 {
@@ -29,9 +28,9 @@
          */
         
         //get the tilemap
-        self.tileMap = [CCTMXTiledMap tiledMapWithTMXFile:@"Background.tmx"];
+        [self setTileMap: [CCTMXTiledMap tiledMapWithTMXFile:@"Background.tmx"]];
         //get the background layer from the tilemap
-        self.background = [_tileMap layerNamed:@"Background"];
+        [self setBackground: [_tileMap layerNamed:@"Background"]];
         //add tilemap to scene
         [self addChild:_tileMap z:-1];
         
@@ -42,15 +41,14 @@
         NSAssert(objects != nil, @"'Objects' object group not found");
         
         //get the spawn point object from object layer
-        NSMutableDictionary *spawnPoint = [objects objectNamed:@"SpawnPoint"];        
-        NSAssert(spawnPoint != nil, @"SpawnPoint object not found");
+        NSMutableDictionary *tempSpawnPoint = [objects objectNamed:@"SpawnPoint"];        
+        NSAssert(tempSpawnPoint != nil, @"SpawnPoint object not found");
         
         //set the variables for the spawnpoint location
-        int x = [[spawnPoint valueForKey:@"x"] intValue];
-        int y = [[spawnPoint valueForKey:@"y"] intValue];
+        int x = [[tempSpawnPoint valueForKey:@"x"] intValue];
+        int y = [[tempSpawnPoint valueForKey:@"y"] intValue];
         //set spawnpoint loc, this is passed to scenemanager where mainlayer takes it
-        self.spawnPoint = ccp(x, y);
-
+        [self setSpawnPoint: ccp(x, y)];
     }
     return self;
         

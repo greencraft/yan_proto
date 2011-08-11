@@ -8,6 +8,7 @@
 
 #import <Foundation/Foundation.h>
 #import "cocos2d.h"
+#import "BGLayer.h"
 //@class Scenemanager;
 #import "Scenemanager.h"
 
@@ -17,14 +18,11 @@
 
 @interface MainLayer : CCLayer {
     CCSprite *_player;
-    CGPoint _spawnPoint;
-    CGPoint _touchLoc;
+    CGPoint _location;
 }
 
 @property (nonatomic, retain) CCSprite *player;
-@property (nonatomic) CGPoint spawnPoint;
-@property (nonatomic) CGPoint touchLoc;
-
+@property (nonatomic) CGPoint location;
 
 
 

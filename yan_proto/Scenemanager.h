@@ -1,8 +1,8 @@
 //
 //  Scenemanager.h
-//  yan prototype
+//  yan_proto
 //
-//  Created by Steve Han on 8/3/11.
+//  Created by Steve Han on 8/11/11.
 //  Copyright 2011 ucsd. All rights reserved.
 //
 
@@ -11,26 +11,16 @@
 
 @class MainLayer;
 @class BGLayer;
-#import "BGLayer.h"
-#import "MainLayer.h"
 
-
-
-@interface Scenemanager : CCScene 
-{
-    CGPoint _spawnPoint;
+@interface Scenemanager : CCScene {
     MainLayer *_mainLayer;
     BGLayer *_bgLayer;
     NSString *_myString;
-
 }
 
-//@property (nonatomic) CGPoint spawnPoint;
-//@property (nonatomic, retain) MainLayer *mainLayer;
-//@property (nonatomic, retain) BGLayer *bgLayer;
-//@property (nonatomic, retain) NSString *myString;
+@property (nonatomic, retain) MainLayer *mainLayer;
+@property (nonatomic, retain) BGLayer *bgLayer;
 
-+ (Scenemanager*) sharedSceneManager;
-- (NSString *) getString;
++ (Scenemanager*) sharedScenemanager;
 
 @end
