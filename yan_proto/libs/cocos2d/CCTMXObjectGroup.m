@@ -70,8 +70,10 @@
 -(NSMutableDictionary*) objectNamed:(NSString *)objectName
 {
 	for( id object in objects_ ) {
-		if( [[object valueForKey:@"name"] isEqual:objectName] )
+		if( [[object valueForKey:@"name"] isEqual:objectName] ) {
+            CCLOG(@"IN CCTMXObjectGroup CLASS OBJECT LAYER NAME :%@", [object valueForKey:@"name"]);
 			return object;
+        }
 		}
 
 	// object not found

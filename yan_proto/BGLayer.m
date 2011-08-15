@@ -16,6 +16,26 @@
 @synthesize background = _background;
 @synthesize spawnPoint = _spawnPoint;
 
+
+-(void)setViewpointCenter:(CGPoint) position {
+    
+    CGSize winSize = [[CCDirector sharedDirector] winSize];
+    CCTMXTiledMap *tileMap = _tileMap;
+    
+    int x = MAX(position.x, winSize.width / 2);
+    int y = MAX(position.y, winSize.height / 2);
+    x = MIN(x, (tileMap.mapSize.width * tileMap.tileSize.width) 
+            - winSize.width / 2);
+    y = MIN(y, (tileMap.mapSize.height * tileMap.tileSize.height) 
+            - winSize.height/2);
+    CGPoint actualPosition = ccp(x, y);
+    
+    CGPoint centerOfView = ccp(winSize.width/2, winSize.height/2);
+    CGPoint viewPoint = ccpSub(centerOfView, actualPosition);
+    self.position = viewPoint;
+    
+}
+
 - (id) init
 {
     if ((self = [super init]))
@@ -47,6 +67,7 @@
         //set the variables for the spawnpoint location
         int x = [[tempSpawnPoint valueForKey:@"x"] intValue];
         int y = [[tempSpawnPoint valueForKey:@"y"] intValue];
+        CCLOG(@"IN BGLAYER CLASS X: %d Y: %d", x, y);
         //set spawnpoint loc, this is passed to scenemanager where mainlayer takes it
         [self setSpawnPoint: ccp(x, y)];
     }

@@ -14,24 +14,6 @@
 @synthesize player = _player;
 @synthesize location = _location;
 
--(void)setViewpointCenter:(CGPoint) position {
-    
-    CGSize winSize = [[CCDirector sharedDirector] winSize];
-    CCTMXTiledMap *tileMap = [[[Scenemanager sharedScenemanager] bgLayer] tileMap];
-    
-    int x = MAX(position.x, winSize.width / 2);
-    int y = MAX(position.y, winSize.height / 2);
-    x = MIN(x, (tileMap.mapSize.width * tileMap.tileSize.width) 
-            - winSize.width / 2);
-    y = MIN(y, (tileMap.mapSize.height * tileMap.tileSize.height) 
-            - winSize.height/2);
-    CGPoint actualPosition = ccp(x, y);
-    
-    CGPoint centerOfView = ccp(winSize.width/2, winSize.height/2);
-    CGPoint viewPoint = ccpSub(centerOfView, actualPosition);
-    self.position = viewPoint;
-    
-}
 
 - (id) init
 {
@@ -40,15 +22,20 @@
         //Enable touch events
         self.isTouchEnabled = YES;
         
-        
+        CGSize winSize = [[CCDirector sharedDirector] winSize];
         //Add player sprite
         self.player = [CCSprite spriteWithFile:@"LinkRunShieldD1.png"];
-        self.player.position = [[Scenemanager sharedScenemanager] bgLayer].spawnPoint;
+        self.player.position = ccp(winSize.width/2, winSize.height/2);
+        CCLOG(@"IN MAINLAYER CLASS X: %f Y: %F", self.player.position.x ,self.player.position.y);
         
         //self.player.position = ccp(winSize.width/2, winSize.height/2);
         [self addChild:self.player z:100 tag:1];
         
-        [self setViewpointCenter:_player.position];
+        CCLOG(@"IN MAINLAYER CLASS LAYER POSITION X: %f, Y: %f", self.position.x, self.position.y);
+        [[[Scenemanager sharedScenemanager] bgLayer] setViewpointCenter:[[Scenemanager sharedScenemanager] bgLayer].spawnPoint];
+
+        //[[[Scenemanager sharedScenemanager] bgLayer] setViewpointCenter:self.player.position];
+        CCLOG(@"IN MAINLAYER CLASS LAYER POSITION X: %f, Y: %f", self.position.x, self.position.y);
         
     }
     return self;
@@ -71,7 +58,7 @@
     
     //schedule to move to the location, every .1
     [self schedule:@selector(pMove:) interval:.1];
-    [self setViewpointCenter:_player.position];
+    //[self setViewpointCenter:_player.position];
 }
 
 - (void)ccTouchesEnded:(NSSet *)touches withEvent:(UIEvent *)event 

@@ -9,6 +9,6 @@
   </data>
  </layer>
  <objectgroup name="Objects" width="50" height="50">
-  <object name="SpawnPoint" x="416" y="608" width="32" height="32"/>
+  <object name="SpawnPoint" x="320" y="608" width="32" height="32"/>
  </objectgroup>
 </map>

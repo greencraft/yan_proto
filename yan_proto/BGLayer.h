@@ -20,4 +20,5 @@
 @property (nonatomic, retain) CCTMXLayer *background;
 @property (nonatomic) CGPoint spawnPoint;
 
+-(void)setViewpointCenter:(CGPoint) position;
 @end
