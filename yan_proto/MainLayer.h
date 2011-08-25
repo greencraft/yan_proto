@@ -18,12 +18,19 @@
 
 @interface MainLayer : CCLayer {
     CCSprite *_player;
-    CGPoint _location;
+    CGPoint _startPosition;
+    CGPoint _endPosition;
+    CGFloat _speed;
+    CGFloat _angle;
+    CGFloat _unitSpeed;
 }
 
 @property (nonatomic, retain) CCSprite *player;
-@property (nonatomic) CGPoint location;
-
+@property (nonatomic) CGPoint startPosition;
+@property (nonatomic) CGPoint endPosition;
+@property (nonatomic) CGFloat speed;
+@property (nonatomic) CGFloat angle;
+@property (nonatomic) CGFloat unitSpeed;
 
 
 @end

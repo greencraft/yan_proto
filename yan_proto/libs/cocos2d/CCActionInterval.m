@@ -542,7 +542,6 @@
 //
 #pragma mark -
 #pragma mark MoveTo
-
 @implementation CCMoveTo
 +(id) actionWithDuration: (ccTime) t position: (CGPoint) p
 {	
