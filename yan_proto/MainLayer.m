@@ -27,7 +27,9 @@
         self.isTouchEnabled = YES;
         
         CGSize winSize = [[CCDirector sharedDirector] winSize];
-        self.speed = 5.0;
+        
+        //SPEED OF PLAYER MOVEMENT
+        self.speed = 3.5;
         self.unitSpeed = (self.speed / 90.0);
         
         //Add player sprite
@@ -48,7 +50,6 @@
 
 - (void)pMove:(ccTime)dt
 {
-    CGPoint temp;
     
     //find the angle
     if ((self.endPosition.x - self.startPosition.x) != 0)
@@ -57,6 +58,7 @@
         self.angle = (self.angle * (180.0/ 3.16));
     }
 
+    //Find what direction player is going in and move in that direction at a constant speed
     if (self.endPosition.x == self.startPosition.x && self.endPosition.y > self.startPosition.y)
     {
         CCLOG(@"Going North");
@@ -76,34 +78,19 @@
     {
         if (self.endPosition.y >= self.startPosition.y)
         {
-            /*
-            temp = ccp([[Scenemanager sharedScenemanager] bgLayer].position.x + (self.speed - (ceil(self.angle * self.unitSpeed))), 
-                ([[Scenemanager sharedScenemanager] bgLayer].position.y + (ceil(self.angle * self.unitSpeed))));
-            CCLOG(@"THE NUMBERS ARE ANGLE: %f, X SPEED: %f, Y SPEED: %f", self.angle, (self.speed - (ceil(self.angle * self.unitSpeed))), (ceil(self.angle * self.unitSpeed)));
-            
-            CCLOG(@"Going NorthEast or East");
             //go northeast or east
-            CCLOG(@"THE CURRENTPOSITION IS X: %f, Y: %f", [[Scenemanager sharedScenemanager] bgLayer].position.x, 
-                                                          [[Scenemanager sharedScenemanager] bgLayer].position.y);
+            CCLOG(@"Going NorthEast or East");
             [[Scenemanager sharedScenemanager] bgLayer].position = 
-                ccp([[Scenemanager sharedScenemanager] bgLayer].position.x + (self.speed - (ceil(self.angle * self.unitSpeed))), 
-                   ([[Scenemanager sharedScenemanager] bgLayer].position.y + (ceil(self.angle * self.unitSpeed) *dt)));
-            
-            CCLOG(@"THE CURRENTPOSITION  SHOULD BE X: %f, Y: %f", temp.x, temp.y);
-            CCLOG(@"THE CURRENTPOSITION CHANGED TO X: %f, Y: %f", [[Scenemanager sharedScenemanager] bgLayer].position.x, 
-                  [[Scenemanager sharedScenemanager] bgLayer].position.y);
-             */
-            [[Scenemanager sharedScenemanager] bgLayer].position = 
-            ccp([[Scenemanager sharedScenemanager] bgLayer].position.x - (self.speed - (ceil(self.angle * self.unitSpeed))), 
-                ([[Scenemanager sharedScenemanager] bgLayer].position.y - (ceil(self.angle * self.unitSpeed))));
+            ccp([[Scenemanager sharedScenemanager] bgLayer].position.x - (self.speed - ((self.angle * self.unitSpeed))), 
+                ([[Scenemanager sharedScenemanager] bgLayer].position.y - ((self.angle * self.unitSpeed))));
         }
         else if (self.endPosition.y < self.startPosition.y)
         {
             //go southeast
             CCLOG(@"Going Southeast");
             [[Scenemanager sharedScenemanager] bgLayer].position = 
-            ccp([[Scenemanager sharedScenemanager] bgLayer].position.x - (self.speed - (ceil(self.angle * self.unitSpeed))), 
-               ([[Scenemanager sharedScenemanager] bgLayer].position.y + (ceil(self.angle * self.unitSpeed))));
+            ccp([[Scenemanager sharedScenemanager] bgLayer].position.x - (self.speed - (self.angle * self.unitSpeed)), 
+               ([[Scenemanager sharedScenemanager] bgLayer].position.y + (self.angle * self.unitSpeed)));
         }
         
     }
@@ -114,16 +101,16 @@
             CCLOG(@"Going NorthWest or West");
             //go northwest or west
             [[Scenemanager sharedScenemanager] bgLayer].position = 
-            ccp([[Scenemanager sharedScenemanager] bgLayer].position.x + (self.speed - (ceil(self.angle * self.unitSpeed))), 
-               ([[Scenemanager sharedScenemanager] bgLayer].position.y - (ceil(self.angle * self.unitSpeed))));
+            ccp([[Scenemanager sharedScenemanager] bgLayer].position.x + (self.speed - (self.angle * self.unitSpeed)), 
+               ([[Scenemanager sharedScenemanager] bgLayer].position.y - (self.angle * self.unitSpeed)));
         }
         else if (self.endPosition.y < self.startPosition.y)
         {
             CCLOG(@"Going SouthWest");
             //go southeast
             [[Scenemanager sharedScenemanager] bgLayer].position = 
-            ccp([[Scenemanager sharedScenemanager] bgLayer].position.x + (self.speed - (ceil(self.angle * self.unitSpeed))), 
-               ([[Scenemanager sharedScenemanager] bgLayer].position.y + (ceil(self.angle * self.unitSpeed))));
+            ccp([[Scenemanager sharedScenemanager] bgLayer].position.x + (self.speed - (self.angle * self.unitSpeed)), 
+               ([[Scenemanager sharedScenemanager] bgLayer].position.y + (self.angle * self.unitSpeed)));
         }
         
     }
