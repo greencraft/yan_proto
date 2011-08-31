@@ -3,6 +3,14 @@
  <tileset firstgid="1" name="tmw_desert_spacing" tilewidth="32" tileheight="32" spacing="1" margin="1">
   <image source="tmw_desert_spacing.png" width="265" height="199"/>
  </tileset>
+ <tileset firstgid="49" name="meta_tiles" tilewidth="32" tileheight="32" spacing="1" margin="1">
+  <image source="meta_tiles.png" width="67" height="34"/>
+  <tile id="0">
+   <properties>
+    <property name="Collidable" value="True"/>
+   </properties>
+  </tile>
+ </tileset>
  <layer name="Background" width="50" height="50">
   <data encoding="base64" compression="zlib">
    eJztlkFuwyAQRVk1XaRNd1VaySZqi5S0tXL/05WFRxr9ACb2gAtm8YSU2Pg/ZjDulFKdpR/HKXTkdWtCGdGpD3hePY6GjSZwTwoHnF97slEWA36Yl1+Xow4GcmG+e7jCvB3Mm7oevIdC2Xy1ipm3D8wn7eDrgaPlbQbvE2uUssf4mtF4snxaLnfwZflw1DGHg6uHzeiBmaagezB7yr7yvRvpd0mPnPVAPwkPvs9T7pXQ+3aJB9U2ZXbeq/gcXhsJj5yQixasB52zfO1S1Ibvaeotl8eP8p8PrvPld4b7UqiHtHKfu2flPiO+I//Hb7OcbjHPe7DsLI/sN6zlnHml8PUvZny2HCwvkfNpdbtfUqw/nn/8+86o2zOGe+B13J3DnyPFbiFPo8d+xr2SHocVkfR4XZEc+7zRaDQajUZjKwz/IMOWHYZK8pfqUHp+7rF2hq2uf8nZa8hfMgOMJVJy9hry10LJdSg5O3eowaMG/gDuxCWI
@@ -11,4 +19,9 @@
  <objectgroup name="Objects" width="50" height="50">
   <object name="SpawnPoint" x="320" y="608" width="32" height="32"/>
  </objectgroup>
+ <layer name="Meta" width="50" height="50">
+  <data encoding="base64" compression="zlib">
+   eJzt1KENADAIRUFW6v7LVVRXNSRA7xIk4pkfAXCsh6tkWkf2TzYdteioZVrHbVe77W73DgAAAAAAAPjZBubzD7M=
+  </data>
+ </layer>
 </map>

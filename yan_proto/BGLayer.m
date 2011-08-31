@@ -15,6 +15,7 @@
 @synthesize tileMap = _tileMap;
 @synthesize background = _background;
 @synthesize spawnPoint = _spawnPoint;
+@synthesize meta = _meta;
 
 
 -(void)setViewpointCenter:(CGPoint) position {
@@ -56,6 +57,12 @@
         
         //************************************************
         
+        //get the meta layer for collision detection
+        self.meta = [_tileMap layerNamed:@"Meta"];
+        _meta.visible = NO;
+        
+        //************************************************
+        
         //get the object layer from the tilemap
         CCTMXObjectGroup *objects = [_tileMap objectGroupNamed:@"Objects"];
         NSAssert(objects != nil, @"'Objects' object group not found");
@@ -75,10 +82,18 @@
         
 }
 
+- (CGPoint) tileCoordForPosition: (CGPoint) position 
+{
+    int x = position.x / _tileMap.tileSize.width;
+    int y = ((_tileMap.mapSize.height * _tileMap.tileSize.height) - position.y) / _tileMap.tileSize.height;
+    return ccp(x, y);
+}
+
 - (void) dealloc
 {
     self.tileMap = nil;
     self.background = nil;
+    self.meta = nil;
     [super dealloc];
 }
 

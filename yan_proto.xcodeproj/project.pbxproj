@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		CC67FC06140DA46F006465C4 /* PCAtlas.plist in Resources */ = {isa = PBXBuildFile; fileRef = CC67FC04140DA46F006465C4 /* PCAtlas.plist */; };
+		CC67FC07140DA46F006465C4 /* PCAtlas.png in Resources */ = {isa = PBXBuildFile; fileRef = CC67FC05140DA46F006465C4 /* PCAtlas.png */; };
 		CCAC13B113EE3FD900751FC4 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CCAC13B013EE3FD900751FC4 /* QuartzCore.framework */; };
 		CCAC13B313EE3FD900751FC4 /* OpenGLES.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CCAC13B213EE3FD900751FC4 /* OpenGLES.framework */; };
 		CCAC13B513EE3FD900751FC4 /* OpenAL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CCAC13B413EE3FD900751FC4 /* OpenAL.framework */; };
@@ -126,12 +128,13 @@
 		CCAC153013EE415600751FC4 /* meta_tiles.png in Resources */ = {isa = PBXBuildFile; fileRef = CCAC152E13EE415600751FC4 /* meta_tiles.png */; };
 		CCAC153113EE415600751FC4 /* tmw_desert_spacing.png in Resources */ = {isa = PBXBuildFile; fileRef = CCAC152F13EE415600751FC4 /* tmw_desert_spacing.png */; };
 		CCAC153313EE47CF00751FC4 /* Background.tmx in Resources */ = {isa = PBXBuildFile; fileRef = CCAC153213EE47CF00751FC4 /* Background.tmx */; };
-		CCAC153513EE48EA00751FC4 /* LinkRunShieldD1.png in Resources */ = {isa = PBXBuildFile; fileRef = CCAC153413EE48EA00751FC4 /* LinkRunShieldD1.png */; };
 		CCAC809A13F4737B00930A97 /* Scenemanager.m in Sources */ = {isa = PBXBuildFile; fileRef = CCAC809913F4737B00930A97 /* Scenemanager.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		CC1AEB3613F345C70081527E /* SynthesizeSingleton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SynthesizeSingleton.h; sourceTree = "<group>"; };
+		CC67FC04140DA46F006465C4 /* PCAtlas.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = PCAtlas.plist; path = Resources/PCAtlas.plist; sourceTree = "<group>"; };
+		CC67FC05140DA46F006465C4 /* PCAtlas.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = PCAtlas.png; path = Resources/PCAtlas.png; sourceTree = "<group>"; };
 		CCAC13AC13EE3FD900751FC4 /* yan_proto.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = yan_proto.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		CCAC13B013EE3FD900751FC4 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		CCAC13B213EE3FD900751FC4 /* OpenGLES.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGLES.framework; path = System/Library/Frameworks/OpenGLES.framework; sourceTree = SDKROOT; };
@@ -372,7 +375,6 @@
 		CCAC152E13EE415600751FC4 /* meta_tiles.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = meta_tiles.png; path = Resources/meta_tiles.png; sourceTree = "<group>"; };
 		CCAC152F13EE415600751FC4 /* tmw_desert_spacing.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = tmw_desert_spacing.png; path = Resources/tmw_desert_spacing.png; sourceTree = "<group>"; };
 		CCAC153213EE47CF00751FC4 /* Background.tmx */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; name = Background.tmx; path = Resources/Background.tmx; sourceTree = "<group>"; };
-		CCAC153413EE48EA00751FC4 /* LinkRunShieldD1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = LinkRunShieldD1.png; path = Resources/LinkRunShieldD1.png; sourceTree = "<group>"; };
 		CCAC809813F4737B00930A97 /* Scenemanager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Scenemanager.h; sourceTree = "<group>"; };
 		CCAC809913F4737B00930A97 /* Scenemanager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Scenemanager.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -453,7 +455,8 @@
 		CCAC13C113EE3FD900751FC4 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
-				CCAC153413EE48EA00751FC4 /* LinkRunShieldD1.png */,
+				CC67FC04140DA46F006465C4 /* PCAtlas.plist */,
+				CC67FC05140DA46F006465C4 /* PCAtlas.png */,
 				CCAC153213EE47CF00751FC4 /* Background.tmx */,
 				CCAC152E13EE415600751FC4 /* meta_tiles.png */,
 				CCAC152F13EE415600751FC4 /* tmw_desert_spacing.png */,
@@ -844,7 +847,8 @@
 				CCAC153013EE415600751FC4 /* meta_tiles.png in Resources */,
 				CCAC153113EE415600751FC4 /* tmw_desert_spacing.png in Resources */,
 				CCAC153313EE47CF00751FC4 /* Background.tmx in Resources */,
-				CCAC153513EE48EA00751FC4 /* LinkRunShieldD1.png in Resources */,
+				CC67FC06140DA46F006465C4 /* PCAtlas.plist in Resources */,
+				CC67FC07140DA46F006465C4 /* PCAtlas.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

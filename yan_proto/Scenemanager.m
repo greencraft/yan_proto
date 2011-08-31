@@ -27,7 +27,6 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(Scenemanager);
         //_myString = @"string property in scene manager";
         
         [self setBgLayer:[BGLayer node]];
-        CCLOG(@"IN SCENEMANAGER CLASS X: %f Y: %F", self.bgLayer.spawnPoint.x,self.bgLayer.spawnPoint.y);
 
         //[_bgLayer retain];
         [self addChild:[self bgLayer] z:0];

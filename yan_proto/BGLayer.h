@@ -14,11 +14,14 @@
     CCTMXTiledMap *_tileMap;
     CCTMXLayer *_background;
     CGPoint _spawnPoint;
+    CCTMXLayer *_meta;
+
 }
 
 @property (nonatomic, retain) CCTMXTiledMap *tileMap;
 @property (nonatomic, retain) CCTMXLayer *background;
 @property (nonatomic) CGPoint spawnPoint;
+@property (nonatomic, retain) CCTMXLayer *meta;
 
 -(void)setViewpointCenter:(CGPoint) position;
 @end

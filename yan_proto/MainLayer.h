@@ -23,6 +23,7 @@
     CGFloat _speed;
     CGFloat _angle;
     CGFloat _unitSpeed;
+    id animateAction;
 }
 
 @property (nonatomic, retain) CCSprite *player;
