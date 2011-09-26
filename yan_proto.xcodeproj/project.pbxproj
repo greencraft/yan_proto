@@ -9,6 +9,8 @@
 /* Begin PBXBuildFile section */
 		CC67FC06140DA46F006465C4 /* PCAtlas.plist in Resources */ = {isa = PBXBuildFile; fileRef = CC67FC04140DA46F006465C4 /* PCAtlas.plist */; };
 		CC67FC07140DA46F006465C4 /* PCAtlas.png in Resources */ = {isa = PBXBuildFile; fileRef = CC67FC05140DA46F006465C4 /* PCAtlas.png */; };
+		CC67FC13140ECC44006465C4 /* Yan.plist in Resources */ = {isa = PBXBuildFile; fileRef = CC67FC12140ECC44006465C4 /* Yan.plist */; };
+		CC67FC1F140F16C8006465C4 /* GameObject.m in Sources */ = {isa = PBXBuildFile; fileRef = CC67FC1E140F16C8006465C4 /* GameObject.m */; };
 		CCAC13B113EE3FD900751FC4 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CCAC13B013EE3FD900751FC4 /* QuartzCore.framework */; };
 		CCAC13B313EE3FD900751FC4 /* OpenGLES.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CCAC13B213EE3FD900751FC4 /* OpenGLES.framework */; };
 		CCAC13B513EE3FD900751FC4 /* OpenAL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CCAC13B413EE3FD900751FC4 /* OpenAL.framework */; };
@@ -129,12 +131,19 @@
 		CCAC153113EE415600751FC4 /* tmw_desert_spacing.png in Resources */ = {isa = PBXBuildFile; fileRef = CCAC152F13EE415600751FC4 /* tmw_desert_spacing.png */; };
 		CCAC153313EE47CF00751FC4 /* Background.tmx in Resources */ = {isa = PBXBuildFile; fileRef = CCAC153213EE47CF00751FC4 /* Background.tmx */; };
 		CCAC809A13F4737B00930A97 /* Scenemanager.m in Sources */ = {isa = PBXBuildFile; fileRef = CCAC809913F4737B00930A97 /* Scenemanager.m */; };
+		CCD05CDD1412900D000F1AE9 /* GameCharacter.m in Sources */ = {isa = PBXBuildFile; fileRef = CCD05CDC1412900D000F1AE9 /* GameCharacter.m */; };
+		CCD05CE114133261000F1AE9 /* Yan.m in Sources */ = {isa = PBXBuildFile; fileRef = CCD05CE014133261000F1AE9 /* Yan.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		CC1AEB3613F345C70081527E /* SynthesizeSingleton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SynthesizeSingleton.h; sourceTree = "<group>"; };
 		CC67FC04140DA46F006465C4 /* PCAtlas.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = PCAtlas.plist; path = Resources/PCAtlas.plist; sourceTree = "<group>"; };
 		CC67FC05140DA46F006465C4 /* PCAtlas.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = PCAtlas.png; path = Resources/PCAtlas.png; sourceTree = "<group>"; };
+		CC67FC12140ECC44006465C4 /* Yan.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Yan.plist; sourceTree = "<group>"; };
+		CC67FC1B140EEB8F006465C4 /* Constants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Constants.h; sourceTree = "<group>"; };
+		CC67FC1C140F006E006465C4 /* CommonProtocols.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CommonProtocols.h; sourceTree = "<group>"; };
+		CC67FC1D140F16C8006465C4 /* GameObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GameObject.h; sourceTree = "<group>"; };
+		CC67FC1E140F16C8006465C4 /* GameObject.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GameObject.m; sourceTree = "<group>"; };
 		CCAC13AC13EE3FD900751FC4 /* yan_proto.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = yan_proto.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		CCAC13B013EE3FD900751FC4 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		CCAC13B213EE3FD900751FC4 /* OpenGLES.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGLES.framework; path = System/Library/Frameworks/OpenGLES.framework; sourceTree = SDKROOT; };
@@ -377,6 +386,10 @@
 		CCAC153213EE47CF00751FC4 /* Background.tmx */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; name = Background.tmx; path = Resources/Background.tmx; sourceTree = "<group>"; };
 		CCAC809813F4737B00930A97 /* Scenemanager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Scenemanager.h; sourceTree = "<group>"; };
 		CCAC809913F4737B00930A97 /* Scenemanager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Scenemanager.m; sourceTree = "<group>"; };
+		CCD05CDB1412900D000F1AE9 /* GameCharacter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GameCharacter.h; sourceTree = "<group>"; };
+		CCD05CDC1412900D000F1AE9 /* GameCharacter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GameCharacter.m; sourceTree = "<group>"; };
+		CCD05CDF14133261000F1AE9 /* Yan.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Yan.h; sourceTree = "<group>"; };
+		CCD05CE014133261000F1AE9 /* Yan.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Yan.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -398,6 +411,89 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		CC67FC11140ECBF5006465C4 /* Plists */ = {
+			isa = PBXGroup;
+			children = (
+				CC67FC12140ECC44006465C4 /* Yan.plist */,
+			);
+			name = Plists;
+			sourceTree = "<group>";
+		};
+		CC67FC14140EDDCD006465C4 /* Layers */ = {
+			isa = PBXGroup;
+			children = (
+				CCAC152113EE400100751FC4 /* MainLayer.h */,
+				CCAC152213EE400100751FC4 /* MainLayer.m */,
+				CCAC152513EE400100751FC4 /* BGLayer.h */,
+				CCAC152613EE400100751FC4 /* BGLayer.m */,
+			);
+			name = Layers;
+			sourceTree = "<group>";
+		};
+		CC67FC15140EDDD5006465C4 /* Scenes */ = {
+			isa = PBXGroup;
+			children = (
+				CCAC809813F4737B00930A97 /* Scenemanager.h */,
+				CCAC809913F4737B00930A97 /* Scenemanager.m */,
+			);
+			name = Scenes;
+			sourceTree = "<group>";
+		};
+		CC67FC16140EDDD8006465C4 /* Constants */ = {
+			isa = PBXGroup;
+			children = (
+				CC67FC1B140EEB8F006465C4 /* Constants.h */,
+				CC67FC1C140F006E006465C4 /* CommonProtocols.h */,
+			);
+			name = Constants;
+			sourceTree = "<group>";
+		};
+		CC67FC17140EDE0F006465C4 /* Singletons */ = {
+			isa = PBXGroup;
+			children = (
+				CC1AEB3613F345C70081527E /* SynthesizeSingleton.h */,
+				CCAC151213EE3FDB00751FC4 /* AppDelegate.h */,
+				CCAC151313EE3FDB00751FC4 /* AppDelegate.m */,
+			);
+			name = Singletons;
+			sourceTree = "<group>";
+		};
+		CC67FC18140EDE15006465C4 /* GameObjects */ = {
+			isa = PBXGroup;
+			children = (
+				CC67FC1D140F16C8006465C4 /* GameObject.h */,
+				CC67FC1E140F16C8006465C4 /* GameObject.m */,
+				CCD05CDB1412900D000F1AE9 /* GameCharacter.h */,
+				CCD05CDC1412900D000F1AE9 /* GameCharacter.m */,
+				CCD05CDF14133261000F1AE9 /* Yan.h */,
+				CCD05CE014133261000F1AE9 /* Yan.m */,
+			);
+			name = GameObjects;
+			sourceTree = "<group>";
+		};
+		CC67FC19140EDE19006465C4 /* EnemyObjects */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = EnemyObjects;
+			sourceTree = "<group>";
+		};
+		CC67FC1A140EDF46006465C4 /* Classes */ = {
+			isa = PBXGroup;
+			children = (
+				CCAC151513EE3FDB00751FC4 /* RootViewController.h */,
+				CCAC151613EE3FDB00751FC4 /* RootViewController.m */,
+				CCAC151B13EE3FDC00751FC4 /* GameConfig.h */,
+				CC67FC17140EDE0F006465C4 /* Singletons */,
+				CC67FC19140EDE19006465C4 /* EnemyObjects */,
+				CC67FC18140EDE15006465C4 /* GameObjects */,
+				CC67FC16140EDDD8006465C4 /* Constants */,
+				CC67FC15140EDDD5006465C4 /* Scenes */,
+				CC67FC14140EDDCD006465C4 /* Layers */,
+			);
+			name = Classes;
+			sourceTree = "<group>";
+		};
 		CCAC13A113EE3FD900751FC4 = {
 			isa = PBXGroup;
 			children = (
@@ -433,18 +529,8 @@
 		CCAC13C013EE3FD900751FC4 /* yan_proto */ = {
 			isa = PBXGroup;
 			children = (
-				CC1AEB3613F345C70081527E /* SynthesizeSingleton.h */,
-				CCAC152113EE400100751FC4 /* MainLayer.h */,
-				CCAC152213EE400100751FC4 /* MainLayer.m */,
-				CCAC809813F4737B00930A97 /* Scenemanager.h */,
-				CCAC809913F4737B00930A97 /* Scenemanager.m */,
-				CCAC152513EE400100751FC4 /* BGLayer.h */,
-				CCAC152613EE400100751FC4 /* BGLayer.m */,
-				CCAC151213EE3FDB00751FC4 /* AppDelegate.h */,
-				CCAC151313EE3FDB00751FC4 /* AppDelegate.m */,
-				CCAC151513EE3FDB00751FC4 /* RootViewController.h */,
-				CCAC151613EE3FDB00751FC4 /* RootViewController.m */,
-				CCAC151B13EE3FDC00751FC4 /* GameConfig.h */,
+				CC67FC1A140EDF46006465C4 /* Classes */,
+				CC67FC11140ECBF5006465C4 /* Plists */,
 				CCAC13C113EE3FD900751FC4 /* Resources */,
 				CCAC13D513EE3FDA00751FC4 /* libs */,
 				CCAC150E13EE3FDB00751FC4 /* Supporting Files */,
@@ -849,6 +935,7 @@
 				CCAC153313EE47CF00751FC4 /* Background.tmx in Resources */,
 				CC67FC06140DA46F006465C4 /* PCAtlas.plist in Resources */,
 				CC67FC07140DA46F006465C4 /* PCAtlas.png in Resources */,
+				CC67FC13140ECC44006465C4 /* Yan.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -959,6 +1046,9 @@
 				CCAC152713EE400100751FC4 /* MainLayer.m in Sources */,
 				CCAC152913EE400100751FC4 /* BGLayer.m in Sources */,
 				CCAC809A13F4737B00930A97 /* Scenemanager.m in Sources */,
+				CC67FC1F140F16C8006465C4 /* GameObject.m in Sources */,
+				CCD05CDD1412900D000F1AE9 /* GameCharacter.m in Sources */,
+				CCD05CE114133261000F1AE9 /* Yan.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
