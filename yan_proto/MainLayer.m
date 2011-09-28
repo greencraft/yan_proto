@@ -81,8 +81,8 @@
     
     CCLOG(@"THE STARTPOINT IS X: %f, Y: %f", self.yan.startPosition.x, self.yan.startPosition.y);
     CCLOG(@"THE ENDPOINT IS X: %f, Y: %f", self.yan.endPosition.x, self.yan.endPosition.y);
-    
-    //[self schedule:@selector(pMove:)];
+
+    self.yan.touchesEnded = NO;
 }
 
 - (void)ccTouchesMoved:(NSSet *)touches withEvent:(UIEvent *)event 
@@ -111,7 +111,7 @@
     //remove 'move' from the schedule stack to completley stop player
     //[self unschedule:@selector(pMove:)];
     
-    self.yan.endPosition = ccp(-1.0, -1.0);
+    self.yan.touchesEnded = YES;
     
 }
 

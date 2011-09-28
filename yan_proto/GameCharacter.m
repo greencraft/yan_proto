@@ -13,6 +13,7 @@
 @synthesize characterHealth = _characterHealth; 
 @synthesize characterState = _characterState;
 @synthesize lastCharacterState = _lastCharacterState;
+@synthesize characterHeading = _characterHeading;
 
 - (id)init
 {

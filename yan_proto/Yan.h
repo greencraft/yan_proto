@@ -20,6 +20,9 @@ typedef enum
 
 @interface Yan : GameCharacter {
     
+    // Flag to know when there is no touch input
+    BOOL _touchesEnded;
+    
     // Running 
     CCAnimation *_YanRunUpAnim;
     CCAnimation *_YanRunDownAnim;
@@ -37,6 +40,8 @@ typedef enum
     CGFloat _unitSpeed;
     
 }
+
+@property (nonatomic) BOOL touchesEnded;
 
 // Running
 @property (nonatomic, retain) CCAnimation *YanRunUpAnim;

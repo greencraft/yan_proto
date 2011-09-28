@@ -11,15 +11,17 @@
 
 @implementation Yan
 
+@synthesize touchesEnded = _touchesEnded;
+
 // Yan movement and idle animations
-@synthesize YanRunUpAnim;
-@synthesize YanRunDownAnim;
-@synthesize YanRunLeftAnim;
-@synthesize YanRunRightAnim;
-@synthesize YanFacingUpIdleAnim;
-@synthesize YanFacingDownIdleAnim;
-@synthesize YanFacingLeftIdleAnim;
-@synthesize YanFacingRightIdleAnim;
+@synthesize YanRunUpAnim = _YanRunUpAnim;
+@synthesize YanRunDownAnim = _YanRunDownAnim;
+@synthesize YanRunLeftAnim = _YanRunLeftAnim;
+@synthesize YanRunRightAnim = _YanRunRightAnim;
+@synthesize YanFacingUpIdleAnim = _YanFacingUpIdleAnim;
+@synthesize YanFacingDownIdleAnim = _YanFacingDownIdleAnim;
+@synthesize YanFacingLeftIdleAnim = _YanFacingLeftIdleAnim;
+@synthesize YanFacingRightIdleAnim = _YanFacingRightIdleAnim;
 
 // properties for Yan's movement
 @synthesize startPosition = _startPosition;
@@ -31,19 +33,19 @@
 
 - (void)dealloc
 {
-    [YanRunUpAnim release];
-    [YanRunDownAnim release];
-    [YanRunLeftAnim release];
-    [YanRunRightAnim release];
-    [YanFacingUpIdleAnim release];
-    [YanFacingDownIdleAnim release];
-    [YanFacingLeftIdleAnim release];
-    [YanFacingRightIdleAnim release];
+    [_YanRunUpAnim release];
+    [_YanRunDownAnim release];
+    [_YanRunLeftAnim release];
+    [_YanRunRightAnim release];
+    [_YanFacingUpIdleAnim release];
+    [_YanFacingDownIdleAnim release];
+    [_YanFacingLeftIdleAnim release];
+    [_YanFacingRightIdleAnim release];
     
     [super dealloc];
 }
 
-- (CharacterStates) checkHeading
+- (CharacterHeading) checkHeading
 {
     
     //find the angle
@@ -53,18 +55,18 @@
         self.angle = (self.angle * (180.0/ 3.16));
     }
     
-    //Find what direction player is going in and move in that direction at a constant speed
+    //Find what direction player is going in
     if (self.endPosition.x == self.startPosition.x && self.endPosition.y > self.startPosition.y)
     {
         //CCLOG(@"Going North");
         //go straight north
-        return kStateMovingUp;
+        return kNorth;
     }
     else if (self.endPosition.x == self.startPosition.x && self.endPosition.y < self.startPosition.y)
     {
         //CCLOG(@"Going South");
         //go straight south
-        return kStateMovingDown;
+        return kSouth;
     }
     else if (self.endPosition.x > self.startPosition.x)
     {
@@ -75,11 +77,11 @@
             //if going more up than left, show the moving up sprite, otherwise...
             if (self.angle >= 45.0)
             {
-                return kStateMovingUp;
+                return kNorthEast;
             }
             else
             {
-                return kStateMovingRight;
+                return kEast;
             }
         }
         else if (self.endPosition.y < self.startPosition.y)
@@ -89,11 +91,11 @@
             //if going more down than left, show the moving down sprite, otherwise...
             if (self.angle >= 45.0)
             {
-                return kStateMovingDown;
+                return kSouthEast;
             }
             else
             {
-                return kStateMovingRight;
+                return kEast;
             }
         }
         
@@ -107,11 +109,11 @@
             //if going more up than left, show the moving up sprite, otherwise...
             if (self.angle >= 45.0)
             {
-                return kStateMovingUp;
+                return kNorthWest;
             }
             else
             {
-                return kStateMovingLeft;
+                return kWest;
             }
         }
         else if (self.endPosition.y < self.startPosition.y)
@@ -121,22 +123,22 @@
             //if going more down than right, show the moving down sprite, otherwise...
             if (self.angle >= 45.0)
             {
-                return kStateMovingDown;
+                return kSouthWest;
             }
             else
             {
-                return kStateMovingLeft;
+                return kWest;
             }
         }
         
     }
     
-    CCLOG(@"Error in moveYan Func, returning idle state");
-    return kStateFacingUpIdle;
+    CCLOG(@"Error in findingheading Func, returning north heading");
+    return kNorth;
 }
 
 
-- (CharacterStates)moveYan:(float)deltaTime
+- (CharacterHeading)moveYan:(float)deltaTime
 {
     
     //find the angle
@@ -154,7 +156,7 @@
         [[Scenemanager sharedScenemanager] bgLayer].position = 
         ccp([[Scenemanager sharedScenemanager] bgLayer].position.x, 
             ([[Scenemanager sharedScenemanager] bgLayer].position.y - (self.speed)));
-        return kStateMovingUp;
+        return kNorth;
     }
     else if (self.endPosition.x == self.startPosition.x && self.endPosition.y < self.startPosition.y)
     {
@@ -163,7 +165,7 @@
         [[Scenemanager sharedScenemanager] bgLayer].position = 
         ccp([[Scenemanager sharedScenemanager] bgLayer].position.x,
             ([[Scenemanager sharedScenemanager] bgLayer].position.y + (self.speed)));
-        return kStateMovingDown;
+        return kSouth;
     }
     else if (self.endPosition.x > self.startPosition.x)
     {
@@ -178,11 +180,11 @@
             //if going more up than left, show the moving up sprite, otherwise...
             if (self.angle >= 45.0)
             {
-                return kStateMovingUp;
+                return kNorth; //need to change to northeast later
             }
             else
             {
-                return kStateMovingRight;
+                return kEast;
             }
         }
         else if (self.endPosition.y < self.startPosition.y)
@@ -196,11 +198,11 @@
             //if going more down than left, show the moving down sprite, otherwise...
             if (self.angle >= 45.0)
             {
-                return kStateMovingDown;
+                return kSouth; // need to change later
             }
             else
             {
-                return kStateMovingRight;
+                return kEast;
             }
         }
         
@@ -218,11 +220,11 @@
             //if going more up than left, show the moving up sprite, otherwise...
             if (self.angle >= 45.0)
             {
-                return kStateMovingUp;
+                return kNorth;
             }
             else
             {
-                return kStateMovingLeft;
+                return kWest;
             }
         }
         else if (self.endPosition.y < self.startPosition.y)
@@ -236,77 +238,84 @@
             //if going more down than right, show the moving down sprite, otherwise...
             if (self.angle >= 45.0)
             {
-                return kStateMovingDown;
+                return kSouth;
             }
             else
             {
-                return kStateMovingLeft;
+                return kWest;
             }
         }
         
     }
     
     CCLOG(@"Error in moveYan Func, returning idle state");
-    return kStateFacingUpIdle;
+    return kSouth;
 }
 
 #pragma mark -
--(void)changeState:(CharacterStates)newState 
+-(void)changeState:(CharacterStates)newState heading: (CharacterHeading) newHeading
 { 
     [self stopAllActions]; 
+    CCLOG(@"IN CHANGESTATE FUNC");
     id action = nil; 
     [self setCharacterState:newState];
+    self.characterHeading = newHeading;
     
     switch (newState) { 
+        // player is changing to a moving state    
+        case kStateMoving:
+            switch (newHeading) {
+                case kNorth:
+                    //CCLOG(@"Yan->Changing State to Moving up");
+                    action = [CCAnimate actionWithAnimation: self.YanRunUpAnim restoreOriginalFrame:YES];
+                    break;
             
-        case kStateMovingUp:
-            //CCLOG(@"Yan->Changing State to Moving up");
-            action = [CCAnimate actionWithAnimation: self.YanRunUpAnim restoreOriginalFrame:YES];
-            break;
+                case kSouth:
+                    //CCLOG(@"Yan->Changing State to Moving down");
+                    action = [CCAnimate actionWithAnimation: self.YanRunDownAnim restoreOriginalFrame:YES];
+                    break;
             
-        case kStateMovingDown:
-            //CCLOG(@"Yan->Changing State to Moving down");
-            action = [CCAnimate actionWithAnimation: self.YanRunDownAnim restoreOriginalFrame:YES];
-            break;
+                case kWest:
+                    //CCLOG(@"Yan->Changing State to Moving Left");
+                    action = [CCAnimate actionWithAnimation: self.YanRunLeftAnim restoreOriginalFrame:YES];
+                    break;
             
-        case kStateMovingLeft:
-            //CCLOG(@"Yan->Changing State to Moving Left");
-            action = [CCAnimate actionWithAnimation: self.YanRunLeftAnim restoreOriginalFrame:YES];
-            break;
-            
-        case kStateMovingRight:
-            //CCLOG(@"Yan->Changing State to Moving Right");
-            action = [CCAnimate actionWithAnimation: self.YanRunRightAnim restoreOriginalFrame:YES];
-            break;
-            
-        case kStateFacingUpIdle:
-            //CCLOG(@"Yan->Changing State to Idling Up");
-            [self setDisplayFrame:[[CCSpriteFrameCache 
+                case kEast:
+                    //CCLOG(@"Yan->Changing State to Moving Right");
+                    action = [CCAnimate actionWithAnimation: self.YanRunRightAnim restoreOriginalFrame:YES];
+                    break;
+                }
+        // player is changing to an idle state    
+        case kStateIdle:
+            switch (newHeading) {
+                case kNorth:
+                    //CCLOG(@"Yan->Changing State to Idling Up");
+                    [self setDisplayFrame:[[CCSpriteFrameCache 
                                     sharedSpriteFrameCache] 
                                    spriteFrameByName:@"PC_runUNeutral.png"]];
-            break;
+                    break;
             
-        case kStateFacingDownIdle:
-            //CCLOG(@"Yan->Changing State to Idling Down");
-            [self setDisplayFrame:[[CCSpriteFrameCache 
+                case kSouth:
+                    //CCLOG(@"Yan->Changing State to Idling Down");
+                    [self setDisplayFrame:[[CCSpriteFrameCache 
                                     sharedSpriteFrameCache] 
                                    spriteFrameByName:@"PC_runDNeutral.png"]];       
-            break;
+                    break;
             
-        case kStateFacingRightIdle:
-            //CCLOG(@"Yan->Changing State to Idling Right");
-            [self setDisplayFrame:[[CCSpriteFrameCache 
+                case kEast:
+                    //CCLOG(@"Yan->Changing State to Idling Right");
+                    [self setDisplayFrame:[[CCSpriteFrameCache 
                                     sharedSpriteFrameCache] 
                                    spriteFrameByName:@"PC_runRNeutral.png"]];
-            break;
+                    break;
             
-        case kStateFacingLeftIdle:
-            //CCLOG(@"Yan->Changing State to Idling Left");
-            [self setDisplayFrame:[[CCSpriteFrameCache 
+                case kWest:
+                    //CCLOG(@"Yan->Changing State to Idling Left");
+                    [self setDisplayFrame:[[CCSpriteFrameCache 
                                     sharedSpriteFrameCache] 
                                    spriteFrameByName:@"PC_runLNeutral.png"]];     
-            break;
-                        
+                    break;
+            }                
         default: 
             //CCLOG(@"Unhandled state %d in RadarDish", newState); 
             break;
@@ -345,15 +354,15 @@
             //colliding with a bullet or enemy, just an example
             if ([character gameObjectType] == kEnemyTypePhaser)
             {
-                [self changeState: kStateTakingDamage];
-                [character changeState: kStateDead];
+                //[self changeState: kStateTakingDamage];
+                //[character changeState: kStateDead heading: kNeutral];
             }
             //colliding with a power up, another example
             else if ([character gameObjectType] == kPowerUpTypeHealth)
             {
-                [self setCharacterHealth: 100.0f];
+                //[self setCharacterHealth: 100.0f];
                 //Remove the power up from the scene
-                [character changeState: kStateDead];
+                //[character changeState: kStateDead heading: kNeutral];
             }
         }
         
@@ -361,33 +370,21 @@
     
     //****************************************************************************
     
-    CharacterStates currentState;
-    CharacterStates nextState;
+    CharacterHeading nextHeading;
     
     //Change to various states depending on what the player is doing
-    if ((self.characterState == kStateFacingUpIdle) ||
-        (self.characterState == kStateFacingDownIdle) ||
-        (self.characterState == kStateFacingLeftIdle) ||
-        (self.characterState == kStateFacingRightIdle) ||
-        (self.characterState == kStateMovingUp) ||
-        (self.characterState == kStateMovingDown) ||
-        (self.characterState == kStateMovingLeft) ||
-        (self.characterState == kStateMovingRight))
+    if ((self.characterState == kStateMoving) || 
+        (self.characterState == kStateIdle))
     {
-        if (self.endPosition.x > 0 && self.endPosition.y > 0)
+        //TODO: Need specfic checks to know what action the player is doing
+        if (self.touchesEnded == NO)
         {
-            currentState = self.characterState;
-            nextState = [self checkHeading];
-            /*if (self.characterState != kStateMovingUp &&
-                self.characterState != kStateMovingDown &&
-                self.characterState != kStateMovingLeft &&
-                self.characterState != kStateMovingRight)
-            {*/
-            if (currentState != nextState)
+            nextHeading = [self moveYan:deltaTime];
+
+            if (self.characterState != kStateMoving || self.characterHeading != nextHeading)
             {
-                [self changeState: [self checkHeading]];
+                [self changeState: kStateMoving heading: nextHeading];
             }
-            [self moveYan:deltaTime];
         }
     }
  
@@ -395,25 +392,14 @@
 
     //Change Character state to idle if no other actions are being done OR
     //Immediatly stop any moving animations if the player takes their finger off
+    
     if ((([self numberOfRunningActions] == 0) && (self.characterState != kStateDead)) ||
         
-        (([self numberOfRunningActions] == 1) && 
-         (self.endPosition.x < 0 && self.endPosition.y < 0) &&
-         ((self.characterState == kStateMovingUp) ||
-          (self.characterState == kStateMovingDown) ||
-          (self.characterState == kStateMovingLeft) ||
-          (self.characterState == kStateMovingRight)))) 
+        (([self numberOfRunningActions] == 1) && (self.touchesEnded == YES) && (self.characterState == kStateMoving)))
     { 
         CCLOG(@"Going to Idle"); 
-        if (self.characterState == kStateMovingUp)
-            [self changeState: kStateFacingUpIdle];
-        if (self.characterState == kStateMovingDown)
-            [self changeState: kStateFacingDownIdle];
-        if (self.characterState == kStateMovingLeft)
-            [self changeState: kStateFacingLeftIdle];
-        if (self.characterState == kStateMovingRight)
-            [self changeState: kStateFacingRightIdle];
-        
+        [self changeState: kStateIdle heading: self.characterHeading];
+
         return;
     }
 }
@@ -463,7 +449,7 @@
         CCLOG(@"### Yan initialized"); 
         [self initAnimations]; 
         self.gameObjectType = kYanType; 
-        [self changeState:kStateFacingDownIdle];   
+        [self changeState:kStateIdle heading: kSouth];   
         
         
          //SPEED OF PLAYER MOVEMENT

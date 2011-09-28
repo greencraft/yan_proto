@@ -34,6 +34,11 @@
     CCLOG(@"GameObject->changeState method should be overridden");
 } 
 
+-(void)changeState:(CharacterStates)newState heading: (CharacterHeading)newHeading
+{
+    CCLOG(@"GameObject->changeState method should be overridden");
+} 
+
 -(void)updateStateWithDeltaTime:(ccTime)deltaTime
            andListOfGameObjects:(CCArray*)listOfGameObjects 
 { 
@@ -42,7 +47,7 @@
 
 -(CGRect)adjustedBoundingBox 
 { 
-    CCLOG(@"GameObect adjustedBoundingBox should be overridden"); 
+    //CCLOG(@"GameObect adjustedBoundingBox should be overridden"); 
     return [self boundingBox];
 }
 

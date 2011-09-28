@@ -6,18 +6,30 @@
 //
 
 typedef enum { 
-    kStateMovingUp,
-    kStateMovingDown,
-    kStateMovingLeft,
-    kStateMovingRight,
-    kStateFacingUpIdle,
-    kStateFacingDownIdle,
-    kStateFacingLeftIdle,
-    kStateFacingRightIdle,
+    kStateMoving,
+    //kStateMovingDown,
+    //kStateMovingLeft,
+    //kStateMovingRight,
+    kStateIdle,
+    //kStateFacingDownIdle,
+    //kStateFacingLeftIdle,
+    //kStateFacingRightIdle,
     
     kStateDead,
     kStateTakingDamage
 } CharacterStates;
+
+typedef enum {
+    kNorth,
+    kSouth,
+    kEast,
+    kWest,
+    kNorthEast,
+    kNorthWest,
+    kSouthEast,
+    kSouthWest,
+    kNeutral
+} CharacterHeading;
 
 typedef enum { 
     kObjectTypeNone, 

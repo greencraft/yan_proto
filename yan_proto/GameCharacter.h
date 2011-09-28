@@ -14,6 +14,7 @@
     int _characterHealth; 
     CharacterStates _characterState;    
     CharacterStates _lastCharacterState;
+    CharacterHeading _characterHeading;
 }
 
 -(int)getWeaponDamage;
@@ -21,6 +22,7 @@
 @property (readwrite) int characterHealth; 
 @property (readwrite) CharacterStates characterState;
 @property (readwrite) CharacterStates lastCharacterState;
+@property (readwrite) CharacterHeading characterHeading;
         
 
 @end
