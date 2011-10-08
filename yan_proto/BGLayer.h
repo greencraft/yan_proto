@@ -15,9 +15,11 @@
     CCTMXLayer *_background;
     CGPoint _spawnPoint;
     CCTMXLayer *_meta;
+    CCArray* blah;
 
 }
 
+@property (nonatomic, retain) CCArray* blah;
 @property (nonatomic, retain) CCTMXTiledMap *tileMap;
 @property (nonatomic, retain) CCTMXLayer *background;
 @property (nonatomic) CGPoint spawnPoint;

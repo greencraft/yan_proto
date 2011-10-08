@@ -12,6 +12,7 @@
 
 @implementation BGLayer
 
+@synthesize blah;
 @synthesize tileMap = _tileMap;
 @synthesize background = _background;
 @synthesize spawnPoint = _spawnPoint;
@@ -41,6 +42,7 @@
 {
     if ((self = [super init]))
     {
+        CCLOG(@"IN BGLAYER CLASS");
         /*
         CCSprite *BGImage = [CCSprite spriteWithFile:@"Mastersword_forest.png"];
         CGSize winSize = [[CCDirector sharedDirector] winSize];
@@ -52,14 +54,23 @@
         [self setTileMap: [CCTMXTiledMap tiledMapWithTMXFile:@"Background.tmx"]];
         //get the background layer from the tilemap
         [self setBackground: [_tileMap layerNamed:@"Background"]];
-        //add tilemap to scene
-        [self addChild:_tileMap z:-1];
+
         
         //************************************************
         
         //get the meta layer for collision detection
         self.meta = [_tileMap layerNamed:@"Meta"];
-        _meta.visible = NO;
+        _meta.visible = YES;
+
+        CGSize s = [self.meta layerSize];
+        for( int x=0; x<s.width;x++) {
+            for( int y=0; y< s.height; y++ ) {
+                if ([self.meta tileGIDAt:ccp(x,y)] != 0)
+                {
+                    [blah addObject:[self.meta tileAt:ccp(x,y)]];
+                }
+            }
+        }
         
         //************************************************
         
@@ -77,6 +88,10 @@
         CCLOG(@"IN BGLAYER CLASS X: %d Y: %d", x, y);
         //set spawnpoint loc, this is passed to scenemanager where mainlayer takes it
         [self setSpawnPoint: ccp(x, y)];
+        
+        //add tilemap to scene
+        [self addChild:_tileMap z:-1];
+
     }
     return self;
         

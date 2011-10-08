@@ -54,7 +54,7 @@
  For example: a tile map (CCTMXMap) or a label with lots of characgers (CCLabelBMFont)
  */
 -(void) addQuadFromSprite:(CCSprite*)sprite quadIndex:(NSUInteger)index
-{
+    {
 	NSAssert( sprite != nil, @"Argument must be non-nil");
 	NSAssert( [sprite isKindOfClass:[CCSprite class]], @"CCSpriteBatchNode only supports CCSprites as children");
 	

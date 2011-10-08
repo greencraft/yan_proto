@@ -77,10 +77,6 @@
     self.yan.endPosition = [[CCDirector sharedDirector] convertToGL:self.yan.endPosition];
     //convert point from view space to node space
     self.yan.endPosition = [self convertToNodeSpace:self.yan.endPosition];
-    
-    
-    CCLOG(@"THE STARTPOINT IS X: %f, Y: %f", self.yan.startPosition.x, self.yan.startPosition.y);
-    CCLOG(@"THE ENDPOINT IS X: %f, Y: %f", self.yan.endPosition.x, self.yan.endPosition.y);
 
     self.yan.touchesEnded = NO;
 }

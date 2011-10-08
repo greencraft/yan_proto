@@ -20,10 +20,10 @@ typedef enum {
 } CharacterStates;
 
 typedef enum {
-    kNorth,
-    kSouth,
-    kEast,
-    kWest,
+    kNorth, //0
+    kSouth, //1
+    kEast, //2
+    kWest, //3
     kNorthEast,
     kNorthWest,
     kSouthEast,

@@ -20,6 +20,9 @@
   <object name="SpawnPoint" x="320" y="608" width="32" height="32"/>
  </objectgroup>
  <layer name="Meta" width="50" height="50">
+  <properties>
+   <property name="Collidable" value="True"/>
+  </properties>
   <data encoding="base64" compression="zlib">
    eJzt1KENADAIRUFW6v7LVVRXNSRA7xIk4pkfAXCsh6tkWkf2TzYdteioZVrHbVe77W73DgAAAAAAAPjZBubzD7M=
   </data>

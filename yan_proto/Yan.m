@@ -44,103 +44,44 @@
     
     [super dealloc];
 }
-
-- (CharacterHeading) checkHeading
-{
+/*
+#pragma mark -
+-(CGRect)adjustedBoundingBox {
+    // Adjust the bouding box to the size of the sprite 
+    // without the transparent space
+    CGRect yanBoundingBox = [self boundingBox];
+    float xOffset;
+    float xCropAmount = yanBoundingBox.size.width * 0.5482f;
+    float yCropAmount = yanBoundingBox.size.height * 0.095f;
     
-    //find the angle
-    if ((self.endPosition.x - self.startPosition.x) != 0)
-    {
-        self.angle = fabs(atanf((self.endPosition.y - self.startPosition.y) / (self.endPosition.x - self.startPosition.x)));
-        self.angle = (self.angle * (180.0/ 3.16));
+    if ([self flipX] == NO) {
+        // Viking is facing to the rigth, back is on the left
+        xOffset = yanBoundingBox.size.width * 0.1566f;
+    } else {
+        // Viking is facing to the left; back is facing right
+        xOffset = yanBoundingBox.size.width * 0.4217f;
     }
+    yanBoundingBox = 
+    CGRectMake(yanBoundingBox.origin.x + xOffset, 
+               yanBoundingBox.origin.y, 
+               yanBoundingBox.size.width - xCropAmount, 
+               yanBoundingBox.size.height - yCropAmount);
     
-    //Find what direction player is going in
-    if (self.endPosition.x == self.startPosition.x && self.endPosition.y > self.startPosition.y)
-    {
-        //CCLOG(@"Going North");
-        //go straight north
-        return kNorth;
-    }
-    else if (self.endPosition.x == self.startPosition.x && self.endPosition.y < self.startPosition.y)
-    {
-        //CCLOG(@"Going South");
-        //go straight south
-        return kSouth;
-    }
-    else if (self.endPosition.x > self.startPosition.x)
-    {
-        if (self.endPosition.y >= self.startPosition.y)
-        {
-            //go northeast or east
-            //CCLOG(@"Going NorthEast or East");            
-            //if going more up than left, show the moving up sprite, otherwise...
-            if (self.angle >= 45.0)
-            {
-                return kNorthEast;
-            }
-            else
-            {
-                return kEast;
-            }
-        }
-        else if (self.endPosition.y < self.startPosition.y)
-        {
-            //go southeast
-            //CCLOG(@"Going Southeast");
-            //if going more down than left, show the moving down sprite, otherwise...
-            if (self.angle >= 45.0)
-            {
-                return kSouthEast;
-            }
-            else
-            {
-                return kEast;
-            }
-        }
-        
-    }
-    else if (self.endPosition.x < self.startPosition.x)
-    {
-        if (self.endPosition.y >= self.startPosition.y)
-        {
-            //CCLOG(@"Going NorthWest or West");
-            //go northwest or west
-            //if going more up than left, show the moving up sprite, otherwise...
-            if (self.angle >= 45.0)
-            {
-                return kNorthWest;
-            }
-            else
-            {
-                return kWest;
-            }
-        }
-        else if (self.endPosition.y < self.startPosition.y)
-        {
-            //CCLOG(@"Going SouthWest");
-            //go southeast            
-            //if going more down than right, show the moving down sprite, otherwise...
-            if (self.angle >= 45.0)
-            {
-                return kSouthWest;
-            }
-            else
-            {
-                return kWest;
-            }
-        }
-        
-    }
+    if (self.characterState == kStateCrouching) {
+		// Shrink the bounding box to 56% of height
+        // 88 pixels on top on iPad
+		yanBoundingBox = CGRectMake(yanBoundingBox.origin.x,
+									   yanBoundingBox.origin.y, 
+									   yanBoundingBox.size.width,
+									   yanBoundingBox.size.height * 0.56f);
+	}
     
-    CCLOG(@"Error in findingheading Func, returning north heading");
-    return kNorth;
+    return yanBoundingBox;
 }
+*/
 
-
-- (CharacterHeading)moveYan:(float)deltaTime
+- (NSDictionary*)moveYan:(float)deltaTime
 {
-    
     //find the angle
     if ((self.endPosition.x - self.startPosition.x) != 0)
     {
@@ -153,19 +94,27 @@
     {
         //CCLOG(@"Going North");
         //go straight north
-        [[Scenemanager sharedScenemanager] bgLayer].position = 
-        ccp([[Scenemanager sharedScenemanager] bgLayer].position.x, 
-            ([[Scenemanager sharedScenemanager] bgLayer].position.y - (self.speed)));
-        return kNorth;
+        CGPoint tempPoint = 
+            ccp([[Scenemanager sharedScenemanager] bgLayer].position.x, 
+                ([[Scenemanager sharedScenemanager] bgLayer].position.y - (self.speed)));
+        return [NSDictionary dictionaryWithObjectsAndKeys:
+                [NSNumber numberWithFloat: tempPoint.x], @"x", 
+                [NSNumber numberWithFloat: tempPoint.y], @"y",
+                [NSNumber numberWithInt: kNorth], @"heading", 
+                nil];
     }
     else if (self.endPosition.x == self.startPosition.x && self.endPosition.y < self.startPosition.y)
     {
         //CCLOG(@"Going South");
         //go straight south
-        [[Scenemanager sharedScenemanager] bgLayer].position = 
-        ccp([[Scenemanager sharedScenemanager] bgLayer].position.x,
-            ([[Scenemanager sharedScenemanager] bgLayer].position.y + (self.speed)));
-        return kSouth;
+        CGPoint tempPoint =        
+            ccp([[Scenemanager sharedScenemanager] bgLayer].position.x,
+                ([[Scenemanager sharedScenemanager] bgLayer].position.y + (self.speed)));
+        return [NSDictionary dictionaryWithObjectsAndKeys:
+                [NSNumber numberWithFloat: tempPoint.x], @"x", 
+                [NSNumber numberWithFloat: tempPoint.y], @"y",
+                [NSNumber numberWithInt: kSouth], @"heading", 
+                nil];
     }
     else if (self.endPosition.x > self.startPosition.x)
     {
@@ -173,36 +122,52 @@
         {
             //go northeast or east
             //CCLOG(@"Going NorthEast or East");
-            [[Scenemanager sharedScenemanager] bgLayer].position = 
+            CGPoint tempPoint = 
             ccp([[Scenemanager sharedScenemanager] bgLayer].position.x - (self.speed - ((self.angle * self.unitSpeed))), 
                 ([[Scenemanager sharedScenemanager] bgLayer].position.y - ((self.angle * self.unitSpeed))));
             
             //if going more up than left, show the moving up sprite, otherwise...
             if (self.angle >= 45.0)
             {
-                return kNorth; //need to change to northeast later
+                return [NSDictionary dictionaryWithObjectsAndKeys:
+                        [NSNumber numberWithFloat: tempPoint.x], @"x", 
+                        [NSNumber numberWithFloat: tempPoint.y], @"y",
+                        [NSNumber numberWithInt: kNorth], @"heading", 
+                        nil];
             }
             else
             {
-                return kEast;
+                return [NSDictionary dictionaryWithObjectsAndKeys:
+                        [NSNumber numberWithFloat: tempPoint.x], @"x", 
+                        [NSNumber numberWithFloat: tempPoint.y], @"y",
+                        [NSNumber numberWithInt: kEast], @"heading", 
+                        nil];
             }
         }
         else if (self.endPosition.y < self.startPosition.y)
         {
-            //go southeast
+            //go southeast or east
             //CCLOG(@"Going Southeast");
-            [[[Scenemanager sharedScenemanager] bgLayer] setPosition: 
+            CGPoint tempPoint =
             ccp([[Scenemanager sharedScenemanager] bgLayer].position.x - (self.speed - (self.angle * self.unitSpeed)), 
-                ([[Scenemanager sharedScenemanager] bgLayer].position.y + (self.angle * self.unitSpeed)))];
+                ([[Scenemanager sharedScenemanager] bgLayer].position.y + (self.angle * self.unitSpeed)));
             
             //if going more down than left, show the moving down sprite, otherwise...
             if (self.angle >= 45.0)
             {
-                return kSouth; // need to change later
+                return [NSDictionary dictionaryWithObjectsAndKeys:
+                        [NSNumber numberWithFloat: tempPoint.x], @"x", 
+                        [NSNumber numberWithFloat: tempPoint.y], @"y",
+                        [NSNumber numberWithInt: kSouth], @"heading",  //Need to change this heading later
+                        nil];
             }
             else
             {
-                return kEast;
+                return [NSDictionary dictionaryWithObjectsAndKeys:
+                        [NSNumber numberWithFloat: tempPoint.x], @"x", 
+                        [NSNumber numberWithFloat: tempPoint.y], @"y",
+                        [NSNumber numberWithInt: kEast], @"heading", 
+                        nil];
             }
         }
         
@@ -211,52 +176,70 @@
     {
         if (self.endPosition.y >= self.startPosition.y)
         {
-            //CCLOG(@"Going NorthWest or West");
             //go northwest or west
-            [[Scenemanager sharedScenemanager] bgLayer].position = 
+            CGPoint tempPoint = 
             ccp([[Scenemanager sharedScenemanager] bgLayer].position.x + (self.speed - (self.angle * self.unitSpeed)), 
                 ([[Scenemanager sharedScenemanager] bgLayer].position.y - (self.angle * self.unitSpeed)));
             
             //if going more up than left, show the moving up sprite, otherwise...
             if (self.angle >= 45.0)
             {
-                return kNorth;
+                return [NSDictionary dictionaryWithObjectsAndKeys:
+                        [NSNumber numberWithFloat: tempPoint.x], @"x", 
+                        [NSNumber numberWithFloat: tempPoint.y], @"y",
+                        [NSNumber numberWithInt: kNorth], @"heading", //need to change later
+                        nil];
             }
             else
             {
-                return kWest;
+                return [NSDictionary dictionaryWithObjectsAndKeys:
+                        [NSNumber numberWithFloat: tempPoint.x], @"x", 
+                        [NSNumber numberWithFloat: tempPoint.y], @"y",
+                        [NSNumber numberWithInt: kWest], @"heading", 
+                        nil];
             }
         }
         else if (self.endPosition.y < self.startPosition.y)
         {
-            //CCLOG(@"Going SouthWest");
-            //go southeast
-            [[Scenemanager sharedScenemanager] bgLayer].position = 
+            //go southwest or west
+            CGPoint tempPoint = 
             ccp([[Scenemanager sharedScenemanager] bgLayer].position.x + (self.speed - (self.angle * self.unitSpeed)), 
                 ([[Scenemanager sharedScenemanager] bgLayer].position.y + (self.angle * self.unitSpeed)));
             
             //if going more down than right, show the moving down sprite, otherwise...
             if (self.angle >= 45.0)
             {
-                return kSouth;
+                return [NSDictionary dictionaryWithObjectsAndKeys:
+                        [NSNumber numberWithFloat: tempPoint.x], @"x", 
+                        [NSNumber numberWithFloat: tempPoint.y], @"y",
+                        [NSNumber numberWithInt: kSouth], @"heading", //change later
+                        nil];
             }
             else
             {
-                return kWest;
+                NSDictionary *myDict = [NSDictionary dictionaryWithObjectsAndKeys:
+                        [NSNumber numberWithFloat: tempPoint.x], @"x", 
+                        [NSNumber numberWithFloat: tempPoint.y], @"y",
+                        [NSNumber numberWithInt: kWest], @"heading", 
+                        nil];
+                return myDict;
             }
         }
         
     }
     
-    CCLOG(@"Error in moveYan Func, returning idle state");
-    return kSouth;
+    CCLOG(@"Error in moveYan Func, returning zero state");
+    return [NSDictionary dictionaryWithObjectsAndKeys:
+            [NSNumber numberWithFloat: 0.0], @"x", 
+            [NSNumber numberWithFloat: 0.0], @"y",
+            [NSNumber numberWithInt: kNorth], @"heading", 
+            nil];
 }
 
 #pragma mark -
 -(void)changeState:(CharacterStates)newState heading: (CharacterHeading) newHeading
 { 
     [self stopAllActions]; 
-    CCLOG(@"IN CHANGESTATE FUNC");
     id action = nil; 
     [self setCharacterState:newState];
     self.characterHeading = newHeading;
@@ -342,13 +325,22 @@
     //Check for Collisions
     //Change myBoundingBox to keep the object count from querying it each time
     CGRect myBoundingBox = [self adjustedBoundingBox];
+    for (CCSprite *wall in [[Scenemanager sharedScenemanager] bgLayer].blah)
+    {
+        CCLOG(@"CHECKING FOR COLLISIONS");
+
+        //CGRect wallBox = [wall adjustedBoundingBox];
+        if (CGRectIntersectsRect(myBoundingBox, [wall boundingBox]))
+            CCLOG(@"COLLIDING WITH A WALL");
+    }
+    
     for (GameCharacter *character in listOfGameObjects)
     {
         //if currently looking at yans sprite, skip it
         if([character tag] == cYanSpriteTagVal)
             continue;
         
-        CGRect characterBox = [character adjustedBoundingBox];
+        /*CGRect characterBox = [character adjustedBoundingBox];
         if (CGRectIntersectsRect(myBoundingBox, characterBox))
         {
             //colliding with a bullet or enemy, just an example
@@ -364,14 +356,12 @@
                 //Remove the power up from the scene
                 //[character changeState: kStateDead heading: kNeutral];
             }
-        }
+        }*/
         
     }
     
     //****************************************************************************
-    
-    CharacterHeading nextHeading;
-    
+        
     //Change to various states depending on what the player is doing
     if ((self.characterState == kStateMoving) || 
         (self.characterState == kStateIdle))
@@ -379,12 +369,16 @@
         //TODO: Need specfic checks to know what action the player is doing
         if (self.touchesEnded == NO)
         {
-            nextHeading = [self moveYan:deltaTime];
+            NSDictionary* dict = [self moveYan:deltaTime];
 
-            if (self.characterState != kStateMoving || self.characterHeading != nextHeading)
+            if (self.characterState != kStateMoving || 
+                self.characterHeading != [[dict objectForKey:@"heading"] intValue])
             {
-                [self changeState: kStateMoving heading: nextHeading];
+                [self changeState: kStateMoving heading: [[dict objectForKey:@"heading"] intValue]];
             }
+            self.characterHeading = [[dict objectForKey:@"heading"] intValue];
+            [[Scenemanager sharedScenemanager] bgLayer].position = ccp([[dict objectForKey:@"x"] floatValue], 
+                                                                       [[dict objectForKey:@"y"] floatValue]);
         }
     }
  
@@ -397,7 +391,6 @@
         
         (([self numberOfRunningActions] == 1) && (self.touchesEnded == YES) && (self.characterState == kStateMoving)))
     { 
-        CCLOG(@"Going to Idle"); 
         [self changeState: kStateIdle heading: self.characterHeading];
 
         return;
@@ -449,6 +442,7 @@
         CCLOG(@"### Yan initialized"); 
         [self initAnimations]; 
         self.gameObjectType = kYanType; 
+        self.touchesEnded = YES;
         [self changeState:kStateIdle heading: kSouth];   
         
         
