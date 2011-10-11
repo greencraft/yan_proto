@@ -94,9 +94,11 @@
     {
         //CCLOG(@"Going North");
         //go straight north
-        CGPoint tempPoint = 
-            ccp([[Scenemanager sharedScenemanager] bgLayer].position.x, 
-                ([[Scenemanager sharedScenemanager] bgLayer].position.y - (self.speed)));
+        CGPoint tempPoint = ccp(0.0, -(self.speed));
+        
+            /*ccp([[Scenemanager sharedScenemanager] bgLayer].position.x, 
+                ([[Scenemanager sharedScenemanager] bgLayer].position.y - (self.speed)));*/
+        
         return [NSDictionary dictionaryWithObjectsAndKeys:
                 [NSNumber numberWithFloat: tempPoint.x], @"x", 
                 [NSNumber numberWithFloat: tempPoint.y], @"y",
@@ -107,9 +109,9 @@
     {
         //CCLOG(@"Going South");
         //go straight south
-        CGPoint tempPoint =        
-            ccp([[Scenemanager sharedScenemanager] bgLayer].position.x,
-                ([[Scenemanager sharedScenemanager] bgLayer].position.y + (self.speed)));
+        CGPoint tempPoint = ccp((self.speed), 0.0);
+            /*ccp([[Scenemanager sharedScenemanager] bgLayer].position.x,
+                ([[Scenemanager sharedScenemanager] bgLayer].position.y + (self.speed)));*/
         return [NSDictionary dictionaryWithObjectsAndKeys:
                 [NSNumber numberWithFloat: tempPoint.x], @"x", 
                 [NSNumber numberWithFloat: tempPoint.y], @"y",
@@ -123,9 +125,12 @@
             //go northeast or east
             //CCLOG(@"Going NorthEast or East");
             CGPoint tempPoint = 
+            ccp(-(self.speed - ((self.angle * self.unitSpeed))), 
+                (-((self.angle * self.unitSpeed))));
+            /*
             ccp([[Scenemanager sharedScenemanager] bgLayer].position.x - (self.speed - ((self.angle * self.unitSpeed))), 
                 ([[Scenemanager sharedScenemanager] bgLayer].position.y - ((self.angle * self.unitSpeed))));
-            
+            */
             //if going more up than left, show the moving up sprite, otherwise...
             if (self.angle >= 45.0)
             {
@@ -149,9 +154,12 @@
             //go southeast or east
             //CCLOG(@"Going Southeast");
             CGPoint tempPoint =
+            ccp(-(self.speed - (self.angle * self.unitSpeed)), 
+                ((self.angle * self.unitSpeed)));
+            /*
             ccp([[Scenemanager sharedScenemanager] bgLayer].position.x - (self.speed - (self.angle * self.unitSpeed)), 
                 ([[Scenemanager sharedScenemanager] bgLayer].position.y + (self.angle * self.unitSpeed)));
-            
+            */
             //if going more down than left, show the moving down sprite, otherwise...
             if (self.angle >= 45.0)
             {
@@ -178,9 +186,12 @@
         {
             //go northwest or west
             CGPoint tempPoint = 
+            ccp((self.speed - (self.angle * self.unitSpeed)), 
+                (-(self.angle * self.unitSpeed)));
+            /*
             ccp([[Scenemanager sharedScenemanager] bgLayer].position.x + (self.speed - (self.angle * self.unitSpeed)), 
                 ([[Scenemanager sharedScenemanager] bgLayer].position.y - (self.angle * self.unitSpeed)));
-            
+            */
             //if going more up than left, show the moving up sprite, otherwise...
             if (self.angle >= 45.0)
             {
@@ -203,8 +214,12 @@
         {
             //go southwest or west
             CGPoint tempPoint = 
+            ccp((self.speed - (self.angle * self.unitSpeed)), 
+                ((self.angle * self.unitSpeed)));
+            /*
             ccp([[Scenemanager sharedScenemanager] bgLayer].position.x + (self.speed - (self.angle * self.unitSpeed)), 
                 ([[Scenemanager sharedScenemanager] bgLayer].position.y + (self.angle * self.unitSpeed)));
+             */
             
             //if going more down than right, show the moving down sprite, otherwise...
             if (self.angle >= 45.0)
@@ -325,6 +340,7 @@
     //Check for Collisions
     //Change myBoundingBox to keep the object count from querying it each time
     CGRect myBoundingBox = [self adjustedBoundingBox];
+    
     for (CCSprite *wall in [[Scenemanager sharedScenemanager] bgLayer].blah)
     {
         CCLOG(@"CHECKING FOR COLLISIONS");
@@ -371,14 +387,41 @@
         {
             NSDictionary* dict = [self moveYan:deltaTime];
 
+            //This is the where Yan's corner points will be on this frame if he is moving
+            CGPoint vertices[] = 
+            {
+                ccp(CGRectGetMinX(self.boundingBox) - [[dict objectForKey:@"x"] floatValue],
+                    CGRectGetMaxY(self.boundingBox) - [[dict objectForKey:@"y"] floatValue]),
+                ccp(CGRectGetMaxX(self.boundingBox) - [[dict objectForKey:@"x"] floatValue],
+                    CGRectGetMaxY(self.boundingBox) - [[dict objectForKey:@"y"] floatValue]),
+                ccp(CGRectGetMinX(self.boundingBox) - [[dict objectForKey:@"x"] floatValue],
+                    CGRectGetMinY(self.boundingBox) - [[dict objectForKey:@"y"] floatValue]),
+                ccp(CGRectGetMaxX(self.boundingBox) - [[dict objectForKey:@"x"] floatValue],
+                    CGRectGetMinY(self.boundingBox) - [[dict objectForKey:@"y"] floatValue])
+            };
+            
+            for (int i = 0; i <= 3; i++)
+            {
+                CCTMXLayer *layer = [[Scenemanager sharedScenemanager] bgLayer].meta;
+                //CCLOG(@"ORIGINAL POINTS IN THE CORNERS ARE %d: X: %f Y: %f", i, vertices[i].x, vertices[i].y);
+                CGPoint temp = [layer convertToNodeSpace:vertices[i]];
+                temp = [[[Scenemanager sharedScenemanager] bgLayer] tileCoordForPosition: temp];
+                //CCLOG(@"Converted POINTS IN THE CORNERS ARE %d: X: %f Y: %f", i, temp.x, temp.y);
+                int p = [layer tileGIDAt:temp];
+                CCLOG(@"GIDS AT CORNERS ARE %d: %d", i, p);
+                if (p == 49)
+                    return;
+            }
+            
             if (self.characterState != kStateMoving || 
                 self.characterHeading != [[dict objectForKey:@"heading"] intValue])
             {
                 [self changeState: kStateMoving heading: [[dict objectForKey:@"heading"] intValue]];
             }
             self.characterHeading = [[dict objectForKey:@"heading"] intValue];
-            [[Scenemanager sharedScenemanager] bgLayer].position = ccp([[dict objectForKey:@"x"] floatValue], 
-                                                                       [[dict objectForKey:@"y"] floatValue]);
+            [[Scenemanager sharedScenemanager] bgLayer].position = 
+                ccp([[Scenemanager sharedScenemanager] bgLayer].position.x + [[dict objectForKey:@"x"] floatValue], 
+                    [[Scenemanager sharedScenemanager] bgLayer].position.y + [[dict objectForKey:@"y"] floatValue]);
         }
     }
  
@@ -433,7 +476,7 @@
 
 }
 
-            
+
 - (id)init
 {
     self = [super init];
@@ -449,6 +492,7 @@
          //SPEED OF PLAYER MOVEMENT
         self.speed = 3.5;
         self.unitSpeed = (self.speed / 90.0);
+
     }
         
     return self;

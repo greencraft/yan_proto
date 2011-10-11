@@ -26,4 +26,7 @@
 @property (nonatomic, retain) CCTMXLayer *meta;
 
 -(void)setViewpointCenter:(CGPoint) position;
+
+- (CGPoint) tileCoordForPosition: (CGPoint) position;
+
 @end

@@ -99,8 +99,8 @@
 
 - (CGPoint) tileCoordForPosition: (CGPoint) position 
 {
-    int x = position.x / _tileMap.tileSize.width;
-    int y = ((_tileMap.mapSize.height * _tileMap.tileSize.height) - position.y) / _tileMap.tileSize.height;
+    int x = position.x / self.tileMap.tileSize.width;
+    int y = ((self.tileMap.mapSize.height * self.tileMap.tileSize.height) - position.y) / self.tileMap.tileSize.height;
     return ccp(x, y);
 }
 

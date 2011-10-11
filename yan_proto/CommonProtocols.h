@@ -7,14 +7,7 @@
 
 typedef enum { 
     kStateMoving,
-    //kStateMovingDown,
-    //kStateMovingLeft,
-    //kStateMovingRight,
-    kStateIdle,
-    //kStateFacingDownIdle,
-    //kStateFacingLeftIdle,
-    //kStateFacingRightIdle,
-    
+    kStateIdle,    
     kStateDead,
     kStateTakingDamage
 } CharacterStates;
