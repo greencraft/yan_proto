@@ -109,6 +109,7 @@
 //is going to be.
 - (void) findNextPosition: (NSDictionary*) dict
 {
+    CCLOG(@"HELLO IN FINDNEXTPOSITION");
     //This is the where Yan's corner points will be on this frame if he is moving
     
     cornerVertices = [NSMutableArray arrayWithObjects:
@@ -123,35 +124,36 @@
                       nil];
     
     cornerVerticesX = [NSMutableArray arrayWithObjects:
-                      [NSValue valueWithCGPoint:ccp(CGRectGetMinX(self.boundingBox) - [[dict objectForKey:@"x"] floatValue],
-                                                    CGRectGetMaxY(self.boundingBox))],
-                      [NSValue valueWithCGPoint:ccp(CGRectGetMaxX(self.boundingBox) - [[dict objectForKey:@"x"] floatValue],
-                                                    CGRectGetMaxY(self.boundingBox))],
-                      [NSValue valueWithCGPoint:ccp(CGRectGetMinX(self.boundingBox) - [[dict objectForKey:@"x"] floatValue],
-                                                    CGRectGetMinY(self.boundingBox))],
-                      [NSValue valueWithCGPoint:ccp(CGRectGetMaxX(self.boundingBox) - [[dict objectForKey:@"x"] floatValue],
-                                                    CGRectGetMinY(self.boundingBox))],
-                      nil];
+                       [NSValue valueWithCGPoint:ccp(CGRectGetMinX(self.boundingBox) - [[dict objectForKey:@"x"] floatValue],
+                                                     CGRectGetMaxY(self.boundingBox))],
+                       [NSValue valueWithCGPoint:ccp(CGRectGetMaxX(self.boundingBox) - [[dict objectForKey:@"x"] floatValue],
+                                                     CGRectGetMaxY(self.boundingBox))],
+                       [NSValue valueWithCGPoint:ccp(CGRectGetMinX(self.boundingBox) - [[dict objectForKey:@"x"] floatValue],
+                                                     CGRectGetMinY(self.boundingBox))],
+                       [NSValue valueWithCGPoint:ccp(CGRectGetMaxX(self.boundingBox) - [[dict objectForKey:@"x"] floatValue],
+                                                     CGRectGetMinY(self.boundingBox))],
+                       nil];
     
     cornerVerticesY = [NSMutableArray arrayWithObjects:
-                      [NSValue valueWithCGPoint:ccp(CGRectGetMinX(self.boundingBox),
-                                                    CGRectGetMaxY(self.boundingBox) - [[dict objectForKey:@"y"] floatValue])],
-                      [NSValue valueWithCGPoint:ccp(CGRectGetMaxX(self.boundingBox),
-                                                    CGRectGetMaxY(self.boundingBox) - [[dict objectForKey:@"y"] floatValue])],
-                      [NSValue valueWithCGPoint:ccp(CGRectGetMinX(self.boundingBox),
-                                                    CGRectGetMinY(self.boundingBox) - [[dict objectForKey:@"y"] floatValue])],
-                      [NSValue valueWithCGPoint:ccp(CGRectGetMaxX(self.boundingBox),
-                                                    CGRectGetMinY(self.boundingBox) - [[dict objectForKey:@"y"] floatValue])],
-                      nil];
+                       [NSValue valueWithCGPoint:ccp(CGRectGetMinX(self.boundingBox),
+                                                     CGRectGetMaxY(self.boundingBox) - [[dict objectForKey:@"y"] floatValue])],
+                       [NSValue valueWithCGPoint:ccp(CGRectGetMaxX(self.boundingBox),
+                                                     CGRectGetMaxY(self.boundingBox) - [[dict objectForKey:@"y"] floatValue])],
+                       [NSValue valueWithCGPoint:ccp(CGRectGetMinX(self.boundingBox),
+                                                     CGRectGetMinY(self.boundingBox) - [[dict objectForKey:@"y"] floatValue])],
+                       [NSValue valueWithCGPoint:ccp(CGRectGetMaxX(self.boundingBox),
+                                                     CGRectGetMinY(self.boundingBox) - [[dict objectForKey:@"y"] floatValue])],
+                       nil];
     
     // Convert those corner points to points in bgLayer space
-    for (int i = 0; i <= 7; i++)
+    for (int i = 0; i <= 3; i++)
     {
+        CCLOG(@"I HOPE I'M NOT AN INFINITE LOOP");
         //pull them from the array
         CGPoint temp = [[cornerVertices objectAtIndex:i] CGPointValue];
         CGPoint tempX = [[cornerVerticesX objectAtIndex:i] CGPointValue];
         CGPoint tempY = [[cornerVerticesY objectAtIndex:i] CGPointValue];
-
+        
         //Convert these coordinates to bgLayer coords
         temp = [[[Scenemanager sharedScenemanager] bgLayer].meta convertToNodeSpace:temp];
         tempX = [[[Scenemanager sharedScenemanager] bgLayer].meta convertToNodeSpace:tempX];
@@ -167,9 +169,8 @@
         [cornerVerticesX replaceObjectAtIndex:i withObject: [NSValue valueWithCGPoint:tempX]];
         [cornerVerticesY replaceObjectAtIndex:i withObject: [NSValue valueWithCGPoint:tempY]];
     }
-
+    
 }
-
 
 - (void)dealloc
 {

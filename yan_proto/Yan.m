@@ -30,7 +30,6 @@
 @synthesize speed = _speed;
 @synthesize unitSpeed = _unitSpeed;
 
-@synthesize _rt;
 
 - (void)dealloc
 {
@@ -46,40 +45,40 @@
     [super dealloc];
 }
 /*
-#pragma mark -
--(CGRect)adjustedBoundingBox {
-    // Adjust the bouding box to the size of the sprite 
-    // without the transparent space
-    CGRect yanBoundingBox = [self boundingBox];
-    float xOffset;
-    float xCropAmount = yanBoundingBox.size.width * 0.5482f;
-    float yCropAmount = yanBoundingBox.size.height * 0.095f;
-    
-    if ([self flipX] == NO) {
-        // Viking is facing to the rigth, back is on the left
-        xOffset = yanBoundingBox.size.width * 0.1566f;
-    } else {
-        // Viking is facing to the left; back is facing right
-        xOffset = yanBoundingBox.size.width * 0.4217f;
-    }
-    yanBoundingBox = 
-    CGRectMake(yanBoundingBox.origin.x + xOffset, 
-               yanBoundingBox.origin.y, 
-               yanBoundingBox.size.width - xCropAmount, 
-               yanBoundingBox.size.height - yCropAmount);
-    
-    if (self.characterState == kStateCrouching) {
-		// Shrink the bounding box to 56% of height
-        // 88 pixels on top on iPad
-		yanBoundingBox = CGRectMake(yanBoundingBox.origin.x,
-									   yanBoundingBox.origin.y, 
-									   yanBoundingBox.size.width,
-									   yanBoundingBox.size.height * 0.56f);
-	}
-    
-    return yanBoundingBox;
-}
-*/
+ #pragma mark -
+ -(CGRect)adjustedBoundingBox {
+ // Adjust the bouding box to the size of the sprite 
+ // without the transparent space
+ CGRect yanBoundingBox = [self boundingBox];
+ float xOffset;
+ float xCropAmount = yanBoundingBox.size.width * 0.5482f;
+ float yCropAmount = yanBoundingBox.size.height * 0.095f;
+ 
+ if ([self flipX] == NO) {
+ // Viking is facing to the rigth, back is on the left
+ xOffset = yanBoundingBox.size.width * 0.1566f;
+ } else {
+ // Viking is facing to the left; back is facing right
+ xOffset = yanBoundingBox.size.width * 0.4217f;
+ }
+ yanBoundingBox = 
+ CGRectMake(yanBoundingBox.origin.x + xOffset, 
+ yanBoundingBox.origin.y, 
+ yanBoundingBox.size.width - xCropAmount, 
+ yanBoundingBox.size.height - yCropAmount);
+ 
+ if (self.characterState == kStateCrouching) {
+ // Shrink the bounding box to 56% of height
+ // 88 pixels on top on iPad
+ yanBoundingBox = CGRectMake(yanBoundingBox.origin.x,
+ yanBoundingBox.origin.y, 
+ yanBoundingBox.size.width,
+ yanBoundingBox.size.height * 0.56f);
+ }
+ 
+ return yanBoundingBox;
+ }
+ */
 
 - (NSDictionary*)moveYan:(float)deltaTime
 {
@@ -93,8 +92,12 @@
     //Find what direction player is going in and move in that direction at a constant speed
     if (self.endPosition.x == self.startPosition.x && self.endPosition.y > self.startPosition.y)
     {
+        //CCLOG(@"Going North");
         //go straight north
         CGPoint tempPoint = ccp(0.0, -(self.speed));
+        
+        /*ccp([[Scenemanager sharedScenemanager] bgLayer].position.x, 
+         ([[Scenemanager sharedScenemanager] bgLayer].position.y - (self.speed)));*/
         
         return [NSDictionary dictionaryWithObjectsAndKeys:
                 [NSNumber numberWithFloat: tempPoint.x], @"x", 
@@ -104,9 +107,11 @@
     }
     else if (self.endPosition.x == self.startPosition.x && self.endPosition.y < self.startPosition.y)
     {
+        //CCLOG(@"Going South");
         //go straight south
         CGPoint tempPoint = ccp((self.speed), 0.0);
-
+        /*ccp([[Scenemanager sharedScenemanager] bgLayer].position.x,
+         ([[Scenemanager sharedScenemanager] bgLayer].position.y + (self.speed)));*/
         return [NSDictionary dictionaryWithObjectsAndKeys:
                 [NSNumber numberWithFloat: tempPoint.x], @"x", 
                 [NSNumber numberWithFloat: tempPoint.y], @"y",
@@ -118,10 +123,14 @@
         if (self.endPosition.y >= self.startPosition.y)
         {
             //go northeast or east
+            //CCLOG(@"Going NorthEast or East");
             CGPoint tempPoint = 
-                ccp(-(self.speed - (self.angle * self.unitSpeed)), 
-                    -(self.angle * self.unitSpeed));
-
+            ccp(-(self.speed - ((self.angle * self.unitSpeed))), 
+                (-((self.angle * self.unitSpeed))));
+            /*
+             ccp([[Scenemanager sharedScenemanager] bgLayer].position.x - (self.speed - ((self.angle * self.unitSpeed))), 
+             ([[Scenemanager sharedScenemanager] bgLayer].position.y - ((self.angle * self.unitSpeed))));
+             */
             //if going more up than left, show the moving up sprite, otherwise...
             if (self.angle >= 45.0)
             {
@@ -143,10 +152,14 @@
         else if (self.endPosition.y < self.startPosition.y)
         {
             //go southeast or east
+            //CCLOG(@"Going Southeast");
             CGPoint tempPoint =
-                ccp(-(self.speed - (self.angle * self.unitSpeed)), 
-                    ((self.angle * self.unitSpeed)));
-
+            ccp(-(self.speed - (self.angle * self.unitSpeed)), 
+                ((self.angle * self.unitSpeed)));
+            /*
+             ccp([[Scenemanager sharedScenemanager] bgLayer].position.x - (self.speed - (self.angle * self.unitSpeed)), 
+             ([[Scenemanager sharedScenemanager] bgLayer].position.y + (self.angle * self.unitSpeed)));
+             */
             //if going more down than left, show the moving down sprite, otherwise...
             if (self.angle >= 45.0)
             {
@@ -173,9 +186,12 @@
         {
             //go northwest or west
             CGPoint tempPoint = 
-                ccp((self.speed - (self.angle * self.unitSpeed)), 
-                    (-(self.angle * self.unitSpeed)));
-
+            ccp((self.speed - (self.angle * self.unitSpeed)), 
+                (-(self.angle * self.unitSpeed)));
+            /*
+             ccp([[Scenemanager sharedScenemanager] bgLayer].position.x + (self.speed - (self.angle * self.unitSpeed)), 
+             ([[Scenemanager sharedScenemanager] bgLayer].position.y - (self.angle * self.unitSpeed)));
+             */
             //if going more up than left, show the moving up sprite, otherwise...
             if (self.angle >= 45.0)
             {
@@ -198,8 +214,12 @@
         {
             //go southwest or west
             CGPoint tempPoint = 
-                ccp((self.speed - (self.angle * self.unitSpeed)), 
-                    ((self.angle * self.unitSpeed)));
+            ccp((self.speed - (self.angle * self.unitSpeed)), 
+                ((self.angle * self.unitSpeed)));
+            /*
+             ccp([[Scenemanager sharedScenemanager] bgLayer].position.x + (self.speed - (self.angle * self.unitSpeed)), 
+             ([[Scenemanager sharedScenemanager] bgLayer].position.y + (self.angle * self.unitSpeed)));
+             */
             
             //if going more down than right, show the moving down sprite, otherwise...
             if (self.angle >= 45.0)
@@ -212,12 +232,11 @@
             }
             else
             {
-                NSDictionary *myDict = [NSDictionary dictionaryWithObjectsAndKeys:
+                return [NSDictionary dictionaryWithObjectsAndKeys:
                         [NSNumber numberWithFloat: tempPoint.x], @"x", 
                         [NSNumber numberWithFloat: tempPoint.y], @"y",
                         [NSNumber numberWithInt: kWest], @"heading", 
                         nil];
-                return myDict;
             }
         }
         
@@ -240,58 +259,58 @@
     self.characterHeading = newHeading;
     
     switch (newState) { 
-        // player is changing to a moving state    
+            // player is changing to a moving state    
         case kStateMoving:
             switch (newHeading) {
                 case kNorth:
                     //CCLOG(@"Yan->Changing State to Moving up");
                     action = [CCAnimate actionWithAnimation: self.YanRunUpAnim restoreOriginalFrame:YES];
                     break;
-            
+                    
                 case kSouth:
                     //CCLOG(@"Yan->Changing State to Moving down");
                     action = [CCAnimate actionWithAnimation: self.YanRunDownAnim restoreOriginalFrame:YES];
                     break;
-            
+                    
                 case kWest:
                     //CCLOG(@"Yan->Changing State to Moving Left");
                     action = [CCAnimate actionWithAnimation: self.YanRunLeftAnim restoreOriginalFrame:YES];
                     break;
-            
+                    
                 case kEast:
                     //CCLOG(@"Yan->Changing State to Moving Right");
                     action = [CCAnimate actionWithAnimation: self.YanRunRightAnim restoreOriginalFrame:YES];
                     break;
-                }
-        // player is changing to an idle state    
+            }
+            // player is changing to an idle state    
         case kStateIdle:
             switch (newHeading) {
                 case kNorth:
                     //CCLOG(@"Yan->Changing State to Idling Up");
                     [self setDisplayFrame:[[CCSpriteFrameCache 
-                                    sharedSpriteFrameCache] 
-                                   spriteFrameByName:@"PC_runUNeutral.png"]];
+                                            sharedSpriteFrameCache] 
+                                           spriteFrameByName:@"PC_runUNeutral.png"]];
                     break;
-            
+                    
                 case kSouth:
                     //CCLOG(@"Yan->Changing State to Idling Down");
                     [self setDisplayFrame:[[CCSpriteFrameCache 
-                                    sharedSpriteFrameCache] 
-                                   spriteFrameByName:@"PC_runDNeutral.png"]];       
+                                            sharedSpriteFrameCache] 
+                                           spriteFrameByName:@"PC_runDNeutral.png"]];       
                     break;
-            
+                    
                 case kEast:
                     //CCLOG(@"Yan->Changing State to Idling Right");
                     [self setDisplayFrame:[[CCSpriteFrameCache 
-                                    sharedSpriteFrameCache] 
-                                   spriteFrameByName:@"PC_runRNeutral.png"]];
+                                            sharedSpriteFrameCache] 
+                                           spriteFrameByName:@"PC_runRNeutral.png"]];
                     break;
-            
+                    
                 case kWest:
                     //CCLOG(@"Yan->Changing State to Idling Left");
                     [self setDisplayFrame:[[CCSpriteFrameCache 
-                                    sharedSpriteFrameCache] 
-                                   spriteFrameByName:@"PC_runLNeutral.png"]];     
+                                            sharedSpriteFrameCache] 
+                                           spriteFrameByName:@"PC_runLNeutral.png"]];     
                     break;
             }                
         default: 
@@ -321,6 +340,15 @@
     //Change myBoundingBox to keep the object count from querying it each time
     CGRect myBoundingBox = [self adjustedBoundingBox];
     
+    for (CCSprite *wall in [[Scenemanager sharedScenemanager] bgLayer].blah)
+    {
+        CCLOG(@"CHECKING FOR COLLISIONS");
+        
+        //CGRect wallBox = [wall adjustedBoundingBox];
+        if (CGRectIntersectsRect(myBoundingBox, [wall boundingBox]))
+            CCLOG(@"COLLIDING WITH A WALL");
+    }
+    
     for (GameCharacter *character in listOfGameObjects)
     {
         //if currently looking at yans sprite, skip it
@@ -328,27 +356,27 @@
             continue;
         
         /*CGRect characterBox = [character adjustedBoundingBox];
-        if (CGRectIntersectsRect(myBoundingBox, characterBox))
-        {
-            //colliding with a bullet or enemy, just an example
-            if ([character gameObjectType] == kEnemyTypePhaser)
-            {
-                //[self changeState: kStateTakingDamage];
-                //[character changeState: kStateDead heading: kNeutral];
-            }
-            //colliding with a power up, another example
-            else if ([character gameObjectType] == kPowerUpTypeHealth)
-            {
-                //[self setCharacterHealth: 100.0f];
-                //Remove the power up from the scene
-                //[character changeState: kStateDead heading: kNeutral];
-            }
-        }*/
+         if (CGRectIntersectsRect(myBoundingBox, characterBox))
+         {
+         //colliding with a bullet or enemy, just an example
+         if ([character gameObjectType] == kEnemyTypePhaser)
+         {
+         //[self changeState: kStateTakingDamage];
+         //[character changeState: kStateDead heading: kNeutral];
+         }
+         //colliding with a power up, another example
+         else if ([character gameObjectType] == kPowerUpTypeHealth)
+         {
+         //[self setCharacterHealth: 100.0f];
+         //Remove the power up from the scene
+         //[character changeState: kStateDead heading: kNeutral];
+         }
+         }*/
         
     }
     
     //****************************************************************************
-        
+    
     //Change to various states depending on what the player is doing
     if ((self.characterState == kStateMoving) || 
         (self.characterState == kStateIdle))
@@ -356,67 +384,59 @@
         //TODO: Need specfic checks to know what action the player is doing
         if (self.touchesEnded == NO)
         {
-            // get yans incremental distance and heading
-            NSDictionary* dict = [self moveYan:deltaTime];
-
-            [self findNextPosition: dict];
-
-            if (self.characterState != kStateMoving || 
-                self.characterHeading != [[dict objectForKey:@"heading"] intValue])
-            {
-                //[self changeState: kStateMoving heading: [[dict objectForKey:@"heading"] intValue]];
-            }
-            self.characterHeading = [[dict objectForKey:@"heading"] intValue];
+            nextPosAndHeading = [self moveYan:deltaTime];
             
-            //Check to see if Yan's corners are going to collide with a wall
-            /*
-            if ([[[Scenemanager sharedScenemanager] bgLayer].meta tileGIDAt:cornerVertices[0]] == 49 ||
-                [[[Scenemanager sharedScenemanager] bgLayer].meta tileGIDAt:cornerVertices[1]] == 49 ||
-                [[[Scenemanager sharedScenemanager] bgLayer].meta tileGIDAt:cornerVertices[2]] == 49 ||
-                [[[Scenemanager sharedScenemanager] bgLayer].meta tileGIDAt:cornerVertices[3]] == 49)
+            [self findNextPosition:nextPosAndHeading];
+            
+            if (self.characterState != kStateMoving || 
+                self.characterHeading != [[nextPosAndHeading objectForKey:@"heading"] intValue])
+            {
+                //this where the animations are called
+                //[self changeState: kStateMoving heading: [[nextPosAndHeading objectForKey:@"heading"] intValue]];
+            }
+            //this is where the heading is changed
+            //self.characterHeading = [[nextPosAndHeading objectForKey:@"heading"] intValue];
+            
+            if ([[[Scenemanager sharedScenemanager] bgLayer].meta tileGIDAt:[[cornerVertices objectAtIndex:0] CGPointValue]] == 49 ||
+                [[[Scenemanager sharedScenemanager] bgLayer].meta tileGIDAt:[[cornerVertices objectAtIndex:1] CGPointValue]] == 49 ||
+                [[[Scenemanager sharedScenemanager] bgLayer].meta tileGIDAt:[[cornerVertices objectAtIndex:2] CGPointValue]] == 49 ||
+                [[[Scenemanager sharedScenemanager] bgLayer].meta tileGIDAt:[[cornerVertices objectAtIndex:3] CGPointValue]] == 49)
             {
                 //If he is facing a horizontal wall, let him move only in the X direction
-                if ([[[Scenemanager sharedScenemanager] bgLayer].meta tileGIDAt:cornerVerticesX[0]] != 49 &&
-                    [[[Scenemanager sharedScenemanager] bgLayer].meta tileGIDAt:cornerVerticesX[1]] != 49 &&
-                    [[[Scenemanager sharedScenemanager] bgLayer].meta tileGIDAt:cornerVerticesX[2]] != 49 &&
-                    [[[Scenemanager sharedScenemanager] bgLayer].meta tileGIDAt:cornerVerticesX[3]] != 49)
+                if ([[[Scenemanager sharedScenemanager] bgLayer].meta tileGIDAt:[[cornerVerticesX objectAtIndex:0] CGPointValue]] != 49 &&
+                    [[[Scenemanager sharedScenemanager] bgLayer].meta tileGIDAt:[[cornerVerticesX objectAtIndex:1] CGPointValue]] != 49 &&
+                    [[[Scenemanager sharedScenemanager] bgLayer].meta tileGIDAt:[[cornerVerticesX objectAtIndex:2] CGPointValue]] != 49 &&
+                    [[[Scenemanager sharedScenemanager] bgLayer].meta tileGIDAt:[[cornerVerticesX objectAtIndex:3] CGPointValue]] != 49)
                 {
                     [[Scenemanager sharedScenemanager] bgLayer].position = 
-                    ccp([[Scenemanager sharedScenemanager] bgLayer].position.x + [[dict objectForKey:@"x"] floatValue], 
+                    ccp([[Scenemanager sharedScenemanager] bgLayer].position.x + [[nextPosAndHeading objectForKey:@"x"] floatValue], 
                         [[Scenemanager sharedScenemanager] bgLayer].position.y);
                     return;
                 }
                 
                 //If he is facing a vertical wall, let him move only in the y direction
-                if ([[[Scenemanager sharedScenemanager] bgLayer].meta tileGIDAt:cornerVerticesY[0]] != 49 &&
-                    [[[Scenemanager sharedScenemanager] bgLayer].meta tileGIDAt:cornerVerticesY[1]] != 49 &&
-                    [[[Scenemanager sharedScenemanager] bgLayer].meta tileGIDAt:cornerVerticesY[2]] != 49 &&
-                    [[[Scenemanager sharedScenemanager] bgLayer].meta tileGIDAt:cornerVerticesY[3]] != 49)
+                if ([[[Scenemanager sharedScenemanager] bgLayer].meta tileGIDAt:[[cornerVerticesY objectAtIndex:0] CGPointValue]] != 49 &&
+                    [[[Scenemanager sharedScenemanager] bgLayer].meta tileGIDAt:[[cornerVerticesY objectAtIndex:1] CGPointValue]] != 49 &&
+                    [[[Scenemanager sharedScenemanager] bgLayer].meta tileGIDAt:[[cornerVerticesY objectAtIndex:2] CGPointValue]] != 49 &&
+                    [[[Scenemanager sharedScenemanager] bgLayer].meta tileGIDAt:[[cornerVerticesY objectAtIndex:3] CGPointValue]] != 49)
                 {
                     [[Scenemanager sharedScenemanager] bgLayer].position = 
                     ccp([[Scenemanager sharedScenemanager] bgLayer].position.x, 
-                        [[Scenemanager sharedScenemanager] bgLayer].position.y + [[dict objectForKey:@"y"] floatValue]);
+                        [[Scenemanager sharedScenemanager] bgLayer].position.y + [[nextPosAndHeading objectForKey:@"y"] floatValue]);
                     return;
                 }
             }
             else
-            {*/
-            CCLOG(@"HI THERE");
-            if ([self isCollisionBetweenSpriteA: self 
-                                   spriteB: [[[Scenemanager sharedScenemanager] bgLayer].meta tileAt:[[cornerVertices objectAtIndex:0] CGPointValue]] 
-                              pixelPerfect: YES])
             {
-                CCLOG(@"GOT A COLLISION HERE");
+                [[Scenemanager sharedScenemanager] bgLayer].position = 
+                ccp([[Scenemanager sharedScenemanager] bgLayer].position.x + [[nextPosAndHeading objectForKey:@"x"] floatValue], 
+                    [[Scenemanager sharedScenemanager] bgLayer].position.y + [[nextPosAndHeading objectForKey:@"y"] floatValue]);
             }
-            [[Scenemanager sharedScenemanager] bgLayer].position = 
-                ccp([[Scenemanager sharedScenemanager] bgLayer].position.x + [[dict objectForKey:@"x"] floatValue], 
-                    [[Scenemanager sharedScenemanager] bgLayer].position.y + [[dict objectForKey:@"y"] floatValue]);
-            //}
         }
     }
- 
+    
     //****************************************************************************
-
+    
     //Change Character state to idle if no other actions are being done OR
     //Immediatly stop any moving animations if the player takes their finger off
     
@@ -424,95 +444,10 @@
         
         (([self numberOfRunningActions] == 1) && (self.touchesEnded == YES) && (self.characterState == kStateMoving)))
     { 
-        //[self changeState: kStateIdle heading: self.characterHeading];
+        [self changeState: kStateIdle heading: self.characterHeading];
+        
         return;
     }
-}
-
--(BOOL) isCollisionBetweenSpriteA:(CCSprite*)spr1 spriteB:(CCSprite*)spr2 pixelPerfect:(BOOL)pp
-{
-    BOOL isCollision = NO; 
-    CGRect intersection = CGRectIntersection([spr1 boundingBox], [spr2 boundingBox]);
-    
-    // Look for simple bounding box collision
-    if (!CGRectIsEmpty(intersection))
-    {
-        // If we're not checking for pixel perfect collisions, return true
-        if (!pp) {return YES;}
-        
-        // Get intersection info
-        unsigned int x = intersection.origin.x;
-        unsigned int y = intersection.origin.y;
-        unsigned int w = intersection.size.width;
-        unsigned int h = intersection.size.height;
-        unsigned int numPixels = w * h;
-        
-        //NSLog(@"\nintersection = (%u,%u,%u,%u), area = %u",x,y,w,h,numPixels);
-        
-        // Draw into the RenderTexture
-        [_rt beginWithClear:0 g:0 b:0 a:0];
-        
-        // Render both sprites: first one in RED and second one in GREEN
-        glColorMask(1, 0, 0, 1);
-        [spr1 visit];
-        glColorMask(0, 1, 0, 1);
-        [spr2 visit];
-        glColorMask(1, 1, 1, 1);
-        
-        // Get color values of intersection area
-        ccColor4B *buffer = malloc( sizeof(ccColor4B) * numPixels );
-        glReadPixels(x, y, w, h, GL_RGBA, GL_UNSIGNED_BYTE, buffer);
-        
-        /******* All this is for testing purposes *********/
-        
-        // Draw the first sprite bounding box
-        CGRect r1 = [spr1 boundingBox];
-        glColor4f(1, 0, 0, 1);
-        glLineWidth(0.5f);
-        ccDrawLine(ccp(r1.origin.x,r1.origin.y), ccp(r1.origin.x+r1.size.width,r1.origin.y));
-        ccDrawLine(ccp(r1.origin.x,r1.origin.y), ccp(r1.origin.x,r1.origin.y+r1.size.height));
-        ccDrawLine(ccp(r1.origin.x+r1.size.width,r1.origin.y), ccp(r1.origin.x+r1.size.width,r1.origin.y+r1.size.height));
-        ccDrawLine(ccp(r1.origin.x,r1.origin.y+r1.size.height), ccp(r1.origin.x+r1.size.width,r1.origin.y+r1.size.height));
-        
-        // Draw the second sprite bounding box
-        CGRect r2 = [spr2 boundingBox];
-        glColor4f(0, 1, 0, 1);
-        glLineWidth(0.5f);
-        ccDrawLine(ccp(r2.origin.x,r2.origin.y), ccp(r2.origin.x+r2.size.width,r2.origin.y));
-        ccDrawLine(ccp(r2.origin.x,r2.origin.y), ccp(r2.origin.x,r2.origin.y+r2.size.height));
-        ccDrawLine(ccp(r2.origin.x+r2.size.width,r2.origin.y), ccp(r2.origin.x+r2.size.width,r2.origin.y+r2.size.height));
-        ccDrawLine(ccp(r2.origin.x,r2.origin.y+r2.size.height), ccp(r2.origin.x+r2.size.width,r2.origin.y+r2.size.height));
-        
-        // Draw the intersection rectangle in BLUE (testing purposes)
-        glColor4f(0, 0, 1, 1);
-        glLineWidth(0.5f);
-        ccDrawLine(ccp(x,y), ccp(x+w,y));
-        ccDrawLine(ccp(x,y), ccp(x,y+h));
-        ccDrawLine(ccp(x+w,y), ccp(x+w,y+h));
-        ccDrawLine(ccp(x,y+h), ccp(x+w,y+h));
-        
-        /**************************************************/
-        
-        [_rt end];
-        
-        // Read buffer
-        unsigned int step = 1;
-        for(unsigned int i=0; i<numPixels; i+=step)
-        {
-            ccColor4B color = buffer[i];
-            
-            if (color.r > 0 && color.g > 0)
-            {
-                isCollision = YES;
-                break;
-            }
-        }
-        
-        // Free buffer memory
-        free(buffer);
-    }
-    
-    return isCollision;
 }
 
 -(void)initAnimations
@@ -548,7 +483,7 @@
      [self loadPlistForAnimationWithName:@"YanFacingRightIdleAnim" 
                             andClassName:NSStringFromClass([self class])]];
     
-
+    
 }
 
 
@@ -564,12 +499,12 @@
         [self changeState:kStateIdle heading: kSouth];   
         
         
-         //SPEED OF PLAYER MOVEMENT
+        //SPEED OF PLAYER MOVEMENT
         self.speed = 3.5;
         self.unitSpeed = (self.speed / 90.0);
-
-    }
         
+    }
+    
     return self;
 }
 

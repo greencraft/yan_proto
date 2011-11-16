@@ -22,7 +22,7 @@
     NSMutableArray* cornerVertices;
     NSMutableArray* cornerVerticesX;
     NSMutableArray* cornerVerticesY;
-    NSDictionary* movementData;
+    NSDictionary* nextPosAndHeading;
 }
 
 @property (readwrite) BOOL isActive;
