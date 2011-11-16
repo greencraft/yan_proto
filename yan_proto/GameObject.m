@@ -105,6 +105,71 @@
     return animationToReturn;
 }
 
+//Used for collision detection purposes, this functions will calculate where the corner points of the bounding box of this sprite
+//is going to be.
+- (void) findNextPosition: (NSDictionary*) dict
+{
+    //This is the where Yan's corner points will be on this frame if he is moving
+    
+    cornerVertices = [NSMutableArray arrayWithObjects:
+                      [NSValue valueWithCGPoint:ccp(CGRectGetMinX(self.boundingBox) - [[dict objectForKey:@"x"] floatValue],
+                                                    CGRectGetMaxY(self.boundingBox) - [[dict objectForKey:@"y"] floatValue])],
+                      [NSValue valueWithCGPoint:ccp(CGRectGetMaxX(self.boundingBox) - [[dict objectForKey:@"x"] floatValue],
+                                                    CGRectGetMaxY(self.boundingBox) - [[dict objectForKey:@"y"] floatValue])],
+                      [NSValue valueWithCGPoint:ccp(CGRectGetMinX(self.boundingBox) - [[dict objectForKey:@"x"] floatValue],
+                                                    CGRectGetMinY(self.boundingBox) - [[dict objectForKey:@"y"] floatValue])],
+                      [NSValue valueWithCGPoint:ccp(CGRectGetMaxX(self.boundingBox) - [[dict objectForKey:@"x"] floatValue],
+                                                    CGRectGetMinY(self.boundingBox) - [[dict objectForKey:@"y"] floatValue])],
+                      nil];
+    
+    cornerVerticesX = [NSMutableArray arrayWithObjects:
+                      [NSValue valueWithCGPoint:ccp(CGRectGetMinX(self.boundingBox) - [[dict objectForKey:@"x"] floatValue],
+                                                    CGRectGetMaxY(self.boundingBox))],
+                      [NSValue valueWithCGPoint:ccp(CGRectGetMaxX(self.boundingBox) - [[dict objectForKey:@"x"] floatValue],
+                                                    CGRectGetMaxY(self.boundingBox))],
+                      [NSValue valueWithCGPoint:ccp(CGRectGetMinX(self.boundingBox) - [[dict objectForKey:@"x"] floatValue],
+                                                    CGRectGetMinY(self.boundingBox))],
+                      [NSValue valueWithCGPoint:ccp(CGRectGetMaxX(self.boundingBox) - [[dict objectForKey:@"x"] floatValue],
+                                                    CGRectGetMinY(self.boundingBox))],
+                      nil];
+    
+    cornerVerticesY = [NSMutableArray arrayWithObjects:
+                      [NSValue valueWithCGPoint:ccp(CGRectGetMinX(self.boundingBox),
+                                                    CGRectGetMaxY(self.boundingBox) - [[dict objectForKey:@"y"] floatValue])],
+                      [NSValue valueWithCGPoint:ccp(CGRectGetMaxX(self.boundingBox),
+                                                    CGRectGetMaxY(self.boundingBox) - [[dict objectForKey:@"y"] floatValue])],
+                      [NSValue valueWithCGPoint:ccp(CGRectGetMinX(self.boundingBox),
+                                                    CGRectGetMinY(self.boundingBox) - [[dict objectForKey:@"y"] floatValue])],
+                      [NSValue valueWithCGPoint:ccp(CGRectGetMaxX(self.boundingBox),
+                                                    CGRectGetMinY(self.boundingBox) - [[dict objectForKey:@"y"] floatValue])],
+                      nil];
+    
+    // Convert those corner points to points in bgLayer space
+    for (int i = 0; i <= 7; i++)
+    {
+        //pull them from the array
+        CGPoint temp = [[cornerVertices objectAtIndex:i] CGPointValue];
+        CGPoint tempX = [[cornerVerticesX objectAtIndex:i] CGPointValue];
+        CGPoint tempY = [[cornerVerticesY objectAtIndex:i] CGPointValue];
+
+        //Convert these coordinates to bgLayer coords
+        temp = [[[Scenemanager sharedScenemanager] bgLayer].meta convertToNodeSpace:temp];
+        tempX = [[[Scenemanager sharedScenemanager] bgLayer].meta convertToNodeSpace:tempX];
+        tempY = [[[Scenemanager sharedScenemanager] bgLayer].meta convertToNodeSpace:tempY];
+        
+        //then find the Tiled map tile those coordinates lie on
+        temp = [[[Scenemanager sharedScenemanager] bgLayer] tileCoordForPosition: temp];
+        tempX = [[[Scenemanager sharedScenemanager] bgLayer] tileCoordForPosition: tempX];
+        tempY = [[[Scenemanager sharedScenemanager] bgLayer] tileCoordForPosition: tempY];
+        
+        //reinsert them (thats what she said)
+        [cornerVertices replaceObjectAtIndex:i withObject: [NSValue valueWithCGPoint:temp]];
+        [cornerVerticesX replaceObjectAtIndex:i withObject: [NSValue valueWithCGPoint:tempX]];
+        [cornerVerticesY replaceObjectAtIndex:i withObject: [NSValue valueWithCGPoint:tempY]];
+    }
+
+}
+
 
 - (void)dealloc
 {

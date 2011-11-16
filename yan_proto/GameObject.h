@@ -10,6 +10,8 @@
 #import "cocos2d.h"
 #import "Constants.h"
 #import "CommonProtocols.h"
+#import "Scenemanager.h"
+#import "BGLayer.h"
 
 
 @interface GameObject : CCSprite {
@@ -17,6 +19,10 @@
     BOOL reactsToScreenBoundaries;
     CGSize screenSize;
     GameObjectType gameObjectType;
+    NSMutableArray* cornerVertices;
+    NSMutableArray* cornerVerticesX;
+    NSMutableArray* cornerVerticesY;
+    NSDictionary* movementData;
 }
 
 @property (readwrite) BOOL isActive;
@@ -30,5 +36,7 @@
 - (void) updateStateWithDeltaTime: (ccTime) deltaTime andListOfGameObjects: (CCArray*) listOfGameObjects;
 - (CGRect) adjustedBoundingBox;
 - (CCAnimation*) loadPlistForAnimationWithName: (NSString *) animationName andClassName: (NSString *) className;
+
+- (void) findNextPosition: (NSDictionary*) dict;
 
 @end

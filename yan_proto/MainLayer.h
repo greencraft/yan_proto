@@ -20,6 +20,7 @@
 @interface MainLayer : CCLayer {
     Yan *_yan;
     CCSpriteBatchNode *sceneSpriteBatchNode;
+    CCSprite *_randomShip;
     
     CGPoint _startPosition;
     CGPoint _endPosition;
@@ -29,7 +30,7 @@
 }
 
 @property (nonatomic, retain) Yan *yan;
-
+@property (nonatomic, assign) CCSprite *_randomShip;
 @property (nonatomic) CGPoint startPosition;
 @property (nonatomic) CGPoint endPosition;
 @property (nonatomic) CGFloat speed;

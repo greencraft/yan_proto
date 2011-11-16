@@ -11,6 +11,7 @@
 @implementation MainLayer
 
 @synthesize yan = _yan;
+@synthesize _randomShip;
 
 @synthesize startPosition = _startPosition;
 @synthesize endPosition = _endPosition;
@@ -52,6 +53,8 @@
         
         self.yan.position = self.startPosition = ccp(winSize.width/2, winSize.height/2);
         self.yan.startPosition = self.startPosition;
+        //[[self.yan texture] setAliasTexParameters];
+
 
         //Add sprite to sprite batch node
         [sceneSpriteBatchNode addChild:self.yan z: cYanSpriteZVal tag: cYanSpriteTagVal];
@@ -60,6 +63,13 @@
 
         //Move position of bglayer so the spawn point will be on camera center
         [[[Scenemanager sharedScenemanager] bgLayer] setViewpointCenter:[[Scenemanager sharedScenemanager] bgLayer].spawnPoint];
+        
+        // create some enemies
+        _randomShip = [CCSprite spriteWithFile:@"ship1.png"];
+        //[[_enemy1 texture] setAliasTexParameters];
+        _randomShip.rotation = 0;
+        _randomShip.position = ccp(winSize.width*0.4f, winSize.height*0.65);
+        [self addChild:_randomShip z:0];
         
         [self scheduleUpdate];
         

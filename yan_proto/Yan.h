@@ -8,8 +8,6 @@
 
 #import <Foundation/Foundation.h>
 #import "GameCharacter.h"
-#import "Scenemanager.h"
-#import "BGLayer.h"
 
 
 typedef enum 
@@ -38,7 +36,7 @@ typedef enum
     CGFloat _angle;
     CGFloat _speed;
     CGFloat _unitSpeed;
-    
+        
 }
 
 @property (nonatomic) BOOL touchesEnded;
@@ -59,6 +57,6 @@ typedef enum
 @property (nonatomic, assign) CGFloat speed;
 @property (nonatomic, assign) CGFloat unitSpeed;
 
-
+@property (nonatomic,assign) CCRenderTexture *_rt;
 
 @end
